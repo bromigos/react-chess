@@ -1,0 +1,17 @@
+export BRANCH=sprint.pet-shop-react
+
+if [ -z ${1+x} ] || [ -z ${2+x} ]
+then
+ echo "Usage:"
+ echo "  ./push GROUP_NAME MY_GITHUB_USERNAME"
+ echo "Example:"
+ echo "  ./push mks-36 octocat"
+ exit 0
+fi
+
+export USER=$2
+export GROUP=$1
+# discard first two arguments to allow passing other args to git (e.g. --force)
+shift 2
+
+git push https://github.com/$USER/$GROUP-sprints master:$BRANCH "$@"
