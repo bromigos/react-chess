@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { fetchShops } from '../models/shop'
 var Chess = require('chess.js').Chess;
-
-export default class PetShopWindow extends React.Component{
+var io = require('socket.io-client');
+export default class ChessBoardComponent extends React.Component{
 
 
   updateBoard(position){
@@ -38,6 +37,10 @@ export default class PetShopWindow extends React.Component{
   }
 
   componentDidMount(){
+    var socket = io('http://localhost:4000');
+    socket.on('connect', function (socket) {
+      console.log('Connected!')});
+
    var startingPosition = this.props.startPosition || 'start';
     var cfg = {
       draggable: true,
