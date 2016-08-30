@@ -18,7 +18,7 @@ export default class Chat extends React.Component{
   // componentDidMount(){
   //   grabRooms()
   //     .then((roomData) => {
-  //       this.setState({shop: shopData}))
+  //       this.setState({room: roomData}))
   //     });
     
   //   grabMessages()
