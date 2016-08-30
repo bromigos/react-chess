@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 // React package for constructing components (and all non-DOM related actions)
 import React from 'react';
-var ChessBoard = require('./models/chessboardjs-0.3.0/js/chessboard-0.3.0');
+var ChessBoard = require('./public/js/chessboard-0.3.0.min.js');
 var $ = require('jquery');
 
 // Import React component from Chat

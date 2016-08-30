@@ -4,6 +4,11 @@ var browserify = require('browserify-middleware');
 var app = express();
 var db = require('./db');
 var bodyParser = require('body-parser');
+var http = require('http');
+var io = require('socket.io')(http);
+
+
+io.on('connection',socket=>console.log(socket));
 
 app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(bodyParser.json());
