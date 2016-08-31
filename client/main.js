@@ -9,11 +9,10 @@ var $ = require('jquery');
 // Import React component from Chat
 import Chat from './components/Chat';
 import ChessboardComponent from './components/ChessboardComponent';
-
+import AppComponent from './components/AppComponent';
 // Render that component to the DOM!
 ReactDOM.render(
 	<div>
-		<ChessboardComponent />
-		<Chat />
+		<AppComponent />
 	</div>
 	, document.getElementById('app'));

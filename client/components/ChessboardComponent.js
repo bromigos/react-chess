@@ -1,13 +1,9 @@
 import React from 'react';
 
 var Chess = require('chess.js').Chess;
-var socket = require('socket.io-client')('http://localhost:4000');
+
 export default class ChessBoardComponent extends React.Component{
 
-
-  updateBoard(position){
-
-  }
 
   constructor(props){
     super(props);
@@ -31,15 +27,16 @@ export default class ChessBoardComponent extends React.Component{
     }
     else
         {
-        console.log(this.state.chessBoard.position());
+        socket.emit('move', {moveObj: newMove, fenString: this.state.chess.fen()});
+        //console.log(this.state.chessBoard.position());
         this.state.chessBoard.position(this.state.chess.fen(),false);
       }
   }
 
   componentDidMount(){
+    var socket = this.props.socket;
     socket.on('connect', function () {
-      console.log('Connected!')
-      socket.emit('feelMe',{stuff: 'otherstuff'});
+      console.log('Chessboard connected')
     });
 
    var startingPosition = this.props.startPosition || 'start';

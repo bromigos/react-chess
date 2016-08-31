@@ -2,7 +2,6 @@ import React from 'react';
 
 // import { fetchShops } from '../models/shop'
 
-var socket = require('socket.io-client')('http://localhost:4000');
 export default class Chat extends React.Component{
 
   constructor(props){
@@ -10,7 +9,7 @@ export default class Chat extends React.Component{
     this.state = {
       room: {},
       messages: [],
-      socket: socket,
+      socket: this.props.socket,
       user: undefined
     };
   }
