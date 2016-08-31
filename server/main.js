@@ -4,11 +4,15 @@ var browserify = require('browserify-middleware');
 var app = express();
 var db = require('./db');
 var bodyParser = require('body-parser');
-var http = require('http');
-var io = require('socket.io')(http);
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
+io.on('connection', function(client){
+	console.log('connection!');
+	client.on('feelMe', data=>console.log(data));
+	client.on('connect', data=>console.log(data));
+});
 
-io.on('connection',socket=>console.log(socket));
 
 app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(bodyParser.json());
@@ -31,5 +35,5 @@ app.get('/app-bundle.js',
 
 
 var port = process.env.PORT || 4000;
-app.listen(port);
+server.listen(port);
 console.log("Listening on localhost:" + port);

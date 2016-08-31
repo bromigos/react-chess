@@ -1,7 +1,7 @@
 import React from 'react';
 
 var Chess = require('chess.js').Chess;
-var io = require('socket.io-client');
+var socket = require('socket.io-client')('http://localhost:4000');
 export default class ChessBoardComponent extends React.Component{
 
 
@@ -37,9 +37,10 @@ export default class ChessBoardComponent extends React.Component{
   }
 
   componentDidMount(){
-    var socket = io('http://localhost:4000');
-    socket.on('connect', function (socket) {
-      console.log('Connected!')});
+    socket.on('connect', function () {
+      console.log('Connected!')
+      socket.emit('feelMe',{stuff: 'otherstuff'});
+    });
 
    var startingPosition = this.props.startPosition || 'start';
     var cfg = {
