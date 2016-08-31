@@ -1,0 +1,20 @@
+==================================================================
+
+'/': db check active game for UUID
+if(user)=> go to game
+else => prompt for name and go to landing page;
+
+
+
+Client 1 sets up new game, 'go'
+--create shortcode/endpoint/gameid
+--create game in db with options & UUID of client1
+--show chessboard and waiting message
+
+Client 2 goes to /:gameid
+--if(gameId) => check open game / UUID matches
+--					else => redirect to '/'
+-- gameWasOpen? set UUID of client 2 in db for gameId
+-- 	Set orientation for game. set in db, 
+-- UUID matches? 
+	-server emits chats & gamePgn/'start'(randomly chosen orientation included) to both clients

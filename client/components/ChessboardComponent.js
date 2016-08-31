@@ -29,10 +29,10 @@ export default class ChessBoardComponent extends React.Component{
     }
   }
 
-  endMove(moveObj,pgnString){
+    endMove(moveObj,pgnString){
         socket.emit('move', {moveObj: moveObj, pgnString: pgnString});
         this.state.chessBoard.position(this.state.chess.fen(),false);
-  }
+    }
 
   incomingMove(moveObj, fenString){
     console.log('incoming move: ',JSON.stringify(moveObj));
