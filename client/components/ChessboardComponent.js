@@ -46,9 +46,9 @@ export default class ChessBoardComponent extends React.Component{
 
   componentDidMount(){
     
-    socket.on('connect', function () {
-      console.log('Chessboard connected')
-    });
+    // socket.on('connect', function () {
+    //   console.log('Chessboard connected')
+    // });
     socket.on('move', data=> this.incomingMove(data.moveObj, data.fenString) ); // incomingMoveHandler
 
 
