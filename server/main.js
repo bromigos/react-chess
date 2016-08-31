@@ -7,13 +7,27 @@ var bodyParser = require('body-parser');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
+var clients = {
+
+};
+
+var count = 0;
+
 io.on('connection', function(client){
   console.log('we have a connection!');
+  clients[client.id] = count++;
+  console.log(clients);
   client.on('new-message', function(msg){
     console.log('message');
     io.emit('receive-message', msg);
   })
-  client.on('move', data=>io.emit('move',data));
+  client.on('move', data=>{
+  	// Data: { moveObj: moveObj, pgnString: pgnString}
+	console.log('Move received from client # ', clients[client.id]);
+	client.broadcast.emit('move',data.moveObj);
+	console.log(data.pgnString);
+  });
+  	
   client.on('connect', data=>console.log(data));
 });
 

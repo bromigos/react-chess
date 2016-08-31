@@ -20,28 +20,38 @@ export default class ChessBoardComponent extends React.Component{
 
    onDrop(source, target, piece, newPos, oldPos, orientation){
     var newMove = this.state.chess.move({from: source, to: target, promotion: 'q'});
-    if(!newMove){ 
-      console.log(this.state.chess.ascii());
+    if(!newMove){ // if move is invalid
+      //console.log(this.state.chess.ascii());
       return 'snapback';
     }
-    else
-        {
-        socket.emit('move', {moveObj: {from: source, to: target, promotion: 'q'}, fenString: this.state.chess.fen()});
-        //console.log(this.state.chessBoard.position());
+    else {
+        this.endMove({moveObj: {from: source, to: target, promotion: 'q'}},this.state.chess.pgn({newline_char: '/'}) );
+    }
+  }
+
+  endMove(moveObj,pgnString){
+        socket.emit('move', {moveObj: moveObj, pgnString: pgnString});
         this.state.chessBoard.position(this.state.chess.fen(),false);
-      }
+  }
+
+  incomingMove(moveObj, fenString){
+    console.log('incoming move: ',JSON.stringify(moveObj));
+    if(fenString !== this.state.chess.fen()){ // 
+      this.state.chess.move(moveObj);
+      this.state.chessBoard.position(this.state.chess.fen());
+    }
+    else
+      console.log('err -- duplicate position received'); //defensive programming :)
   }
 
   componentDidMount(){
     
-    socket.on('connect', function () {
-      console.log('Chessboard connected')
-    });
-    socket.on('move', data=> {
-      console.log(data);
-      this.state.chess.move(data.moveObj);
-      this.state.chessBoard.position(this.state.chess.fen());
-    });
+    // socket.on('connect', function () {
+    //   console.log('Chessboard connected')
+    // });
+    socket.on('move', data=> this.incomingMove(data.moveObj, data.fenString) ); // incomingMoveHandler
+
+
    var startingPosition = this.props.startPosition || 'start';
     var cfg = {
       draggable: true,
