@@ -11,4 +11,9 @@ import Chat from './components/Chat';
 import ChessboardComponent from './components/ChessboardComponent';
 
 // Render that component to the DOM!
-ReactDOM.render(<ChessboardComponent />, document.getElementById('app'));
+ReactDOM.render(
+	<div>
+		<ChessboardComponent />
+		<Chat />
+	</div>
+	, document.getElementById('app'));

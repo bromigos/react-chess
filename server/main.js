@@ -8,9 +8,13 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 io.on('connection', function(client){
-	console.log('connection!');
-	client.on('feelMe', data=>console.log(data));
-	client.on('connect', data=>console.log(data));
+  console.log('we have a connection!');
+  client.on('new-message', function(msg){
+    console.log('message');
+    io.emit('receive-message', msg);
+  })
+  client.on('feelMe', data=>console.log(data));
+  client.on('connect', data=>console.log(data));
 });
 
 

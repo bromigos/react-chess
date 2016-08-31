@@ -2,15 +2,38 @@ import React from 'react';
 
 // import { fetchShops } from '../models/shop'
 
-
+var socket = require('socket.io-client')('http://localhost:4000');
 export default class Chat extends React.Component{
 
   constructor(props){
     super(props);
     this.state = {
       room: {},
-      messages: []
+      messages: [],
+      socket: socket,
+      user: undefined
     };
+  }
+  componentDidMount(){
+    this.state.socket.on('receive-message', (msg)=>{ // es6 style, implicitly binds parameter "this"
+      var messages = this.state.messages;
+      messages.push(msg);
+      this.setState({messages: messages})
+      console.log(this.state.messages);
+    })
+  }
+
+  submitMessage(){
+    var body = document.getElementById("message").value;
+    var message = {
+      body: body,
+      user: this.state.user || "anonymous"
+    }
+    this.state.socket.emit('new-message', message);
+  }
+  pickUser(){
+    var user = document.getElementById("user").value;
+    this.setState({user: user})
   }
 
   // The following should grab the rooms and fetch the messages
@@ -29,14 +52,17 @@ export default class Chat extends React.Component{
 
 
   render(){
+    var messages = this.state.messages.map((msg)=>
+      <li><strong>{msg.user}</strong><span>: {msg.body}</span></li>
+    )
     return (
       <div className='chat-box'>
-        <div>{this.state.messages}</div>
-        <form onSubmit={this.submit}>
-          <input onChange={this.updateInput} value={this.state.text} type="text" placeholder="Your message" />
-          <input type="submit" value="Send" />
-        </form>
-    </div>
+        <ul>
+          {messages}
+        </ul>
+        <input id="message" type="text"/> <button onClick={()=>this.submitMessage()}>Send</button><br/>
+        <input id="user" type="text"/> <button onClick={()=>this.pickUser()}>Choose a Username</button>
+      </div>
     );
   }
 }
