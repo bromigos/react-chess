@@ -13,7 +13,7 @@ io.on('connection', function(client){
     console.log('message');
     io.emit('receive-message', msg);
   })
-  client.on('feelMe', data=>console.log(data));
+  client.on('move', data=>io.emit('move',data));
   client.on('connect', data=>console.log(data));
 });
 

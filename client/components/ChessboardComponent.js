@@ -1,14 +1,13 @@
 import React from 'react';
 
 var Chess = require('chess.js').Chess;
-
+var socket;
 export default class ChessBoardComponent extends React.Component{
 
 
   constructor(props){
     super(props);
-    
-
+    socket = this.props.socket;
   }
 
   onDragStart(source, piece, position, orientation) {
@@ -27,18 +26,22 @@ export default class ChessBoardComponent extends React.Component{
     }
     else
         {
-        socket.emit('move', {moveObj: newMove, fenString: this.state.chess.fen()});
+        socket.emit('move', {moveObj: {from: source, to: target, promotion: 'q'}, fenString: this.state.chess.fen()});
         //console.log(this.state.chessBoard.position());
         this.state.chessBoard.position(this.state.chess.fen(),false);
       }
   }
 
   componentDidMount(){
-    var socket = this.props.socket;
+    
     socket.on('connect', function () {
       console.log('Chessboard connected')
     });
-
+    socket.on('move', data=> {
+      console.log(data);
+      this.state.chess.move(data.moveObj);
+      this.state.chessBoard.position(this.state.chess.fen());
+    });
    var startingPosition = this.props.startPosition || 'start';
     var cfg = {
       draggable: true,
