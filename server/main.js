@@ -6,6 +6,7 @@ var db = require('./db');
 var bodyParser = require('body-parser');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+var Chats = require('./chat');
 
 var clients = {
 
@@ -18,7 +19,8 @@ io.on('connection', function(client){
   clients[client.id] = count++;
   console.log(clients);
   client.on('new-message', function(msg){
-    console.log('message');
+    console.log('msg:', msg);
+    // Chats.insert(msg)
     io.emit('receive-message', msg);
   })
   client.on('move', data=>{
