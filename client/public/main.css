@@ -1,18 +1,24 @@
-.input {
-  background:#eee;
-  float:left;
-  margin:1rem;
-  padding:0 1rem;
-  height:320px;
-  width:200px
+.chessboard {
+  float: left;
+  width: 600px;
+  padding-left: 20px;
+  padding-right: 30px;
 }
 
-.pet img {
-  max-width: 100%;
+.chat-container {
+  float: right;
+  background:#ddd;
+  height:590px;
+  width:625px;
+  overflow-y: scroll;
 }
 
-.auth-panel .error {
+#message {
+  float:right;
+  width: 500px;
+}
+
+.sendButton {
   background-color: #fdd;
-  border-color: #a00;
-  padding: 1rem;
+  float:right;
 }
