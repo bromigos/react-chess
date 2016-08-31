@@ -7,34 +7,36 @@ var bodyParser = require('body-parser');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var Chats = require('./chat');
+var uuid = require('uuid');
+var cookieParser = require('cookie-parser')
+var Main = module.exports;
+Main.io = io;
+var socketio = require('./socketio');
 
-var clients = {
 
-};	
 
 var count = 0;
 
-io.on('connection', function(client){
-  console.log('we have a connection!');
-  clients[client.id] = count++;
-  console.log(clients);
-  client.on('new-message', function(msg){
-    console.log('msg:', msg);
-    // Chats.insert(msg)
-    io.emit('receive-message', msg);
-  })
-  client.on('move', data=>{
-  	// Data: { moveObj: moveObj, pgnString: pgnString}
-	console.log('Move received from client # ', clients[client.id]);
-	client.broadcast.emit('move',data.moveObj);
-	console.log(data.pgnString);
-  });
-  	
-  client.on('connect', data=>console.log(data));
+
+Main.incomingMove = function(data){
+	// 1. Validate move?
+	// 2. Send move to DB
+	// 2. Send move to opponent
+
+	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
+	// console.log('Move received from client ', data.uuid);
+	// client.broadcast.emit('move',data.moveObj);
+	// console.log(data.pgnString);
+	console.log(data);
+}
+
+
+app.get('/', function(req,res) {
+	res.sendFile(path.resolve('./client/public/index.html'));
 });
 
-
 app.use(express.static(path.join(__dirname, "../client/public")));
+
 app.use(bodyParser.json());
 
 
@@ -48,7 +50,7 @@ app.get('/app-bundle.js',
 //endpoint for testing only
 
 app.get('/game_1785', function(req,res) {
-		
+
 });
 
 

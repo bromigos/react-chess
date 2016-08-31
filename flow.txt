@@ -1,6 +1,6 @@
 ==================================================================
 
-'/': db check active game for UUID
+'/': check/set client UUID, db check active game for UUID
 if(user)=> go to game
 else => prompt for name and go to landing page;
 

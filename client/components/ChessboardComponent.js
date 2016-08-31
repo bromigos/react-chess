@@ -31,7 +31,7 @@ export default class ChessBoardComponent extends React.Component{
   }
 
     endMove(moveObj,pgnString){
-        socket.emit('move', {moveObj: moveObj, pgnString: pgnString});
+        socket.emit('move', {uuid: this.state.uuid, moveObj: moveObj, pgnString: pgnString});
         this.state.chessBoard.position(this.state.chess.fen(),false);
     }
 
@@ -51,7 +51,22 @@ export default class ChessBoardComponent extends React.Component{
     //   console.log('Chessboard connected')
     // });
     socket.on('move', data=> this.incomingMove(data.moveObj, data.fenString) ); // incomingMoveHandler
+    
+    var myUUID;
 
+    if(document.cookie && document.cookie.indexOf('uuid') > -1)
+        myUUID = document.cookie.substring(document.cookie.indexOf('uuid')+5);
+    // server sends UUID to every user, even ones that might have an existing cookie
+    // if we have UUID from cookie, ignore uuid given.
+    // Send back whatever UUID will be used by the client
+    socket.on('uuid', uuid=> {
+      if(myUUID===undefined){
+          document.cookie = 'uuid=' + uuid + ';';
+          myUUID = uuid;
+          console.log(document.cookie);
+      }
+      socket.emit('uuid',myUUID);
+    });
 
    var startingPosition = this.props.startPosition || 'start';
     var cfg = {
@@ -64,7 +79,8 @@ export default class ChessBoardComponent extends React.Component{
    if(startingPosition==='start')
       startingPosition = undefined;
     this.state = {  chess:      new Chess(startingPosition), 
-                    chessBoard:  new ChessBoard('board1',cfg)
+                    chessBoard:  new ChessBoard('board1',cfg),
+                    uuid: myUUID
   };
   console.log(this.state.chess.turn());
   }
