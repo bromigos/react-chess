@@ -9,6 +9,7 @@ var $ = require('jquery');
 // Import React component from Chat
 import Chat from './components/Chat';
 import ChessboardComponent from './components/ChessboardComponent';
+import NavComponent from './components/NavComponent';
 import AppComponent from './components/AppComponent';
 // Render that component to the DOM!
 ReactDOM.render(
