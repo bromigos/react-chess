@@ -45,7 +45,18 @@ app.get('/app-bundle.js',
   })
 );
 
+//endpoint for testing only
 
+app.get('/game_1785', function(req,res) {
+		
+});
+
+
+app.get('/game_*', function(req,res) { // responds to /game_:gameid
+	var gameId = req.url.substring(req.url.lastIndexOf('/game_')+6);
+	console.log(gameId);
+	res.end(gameId);
+});
 
 
 
