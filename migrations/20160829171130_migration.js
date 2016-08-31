@@ -15,12 +15,7 @@ exports.up = function(knex, Promise) {
       table.string('user2_orientation');
       table.string('turn_time');
       table.boolean('real_time');
-    }),
-    knex.schema.createTable('moves', function(table){
-      table.string('move_id');
-      table.string('game_id');
       table.string('position');
-      table.string('next_move');
     }),
     knex.schema.createTable('messages', function(table){
       table.string('message_id');
@@ -35,7 +30,6 @@ exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('users'),
     knex.schema.dropTable('games'),
-    knex.schema.dropTable('moves'),
     knex.schema.dropTable('messages')
   ])
 };

@@ -10,7 +10,7 @@ export default class Chat extends React.Component{
       room: {},
       messages: [],
       socket: this.props.socket,
-      user: undefined
+      user: this.props.username
     };
   }
   componentDidMount(){
@@ -24,16 +24,17 @@ export default class Chat extends React.Component{
 
   submitMessage(){
     var body = document.getElementById("message").value;
+    document.getElementById("message").value = ""
     var message = {
       body: body,
       user: this.state.user || "anonymous"
     }
     this.state.socket.emit('new-message', message);
   }
-  pickUser(){
-    var user = document.getElementById("user").value;
-    this.setState({user: user})
-  }
+  // pickUser(){
+  //   var user = document.getElementById("user").value;
+  //   this.setState({user: user})
+  // }
 
   // The following should grab the rooms and fetch the messages
   // for that room.
@@ -60,7 +61,6 @@ export default class Chat extends React.Component{
           {messages}
         </ul>
         <input id="message" type="text"/> <button onClick={()=>this.submitMessage()}>Send</button><br/>
-        <input id="user" type="text"/> <button onClick={()=>this.pickUser()}>Choose a Username</button>
       </div>
     );
   }
