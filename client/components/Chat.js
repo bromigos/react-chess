@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import { fetchShops } from '../models/shop'
-
 export default class Chat extends React.Component{
 
   constructor(props){
@@ -56,11 +54,13 @@ export default class Chat extends React.Component{
       <li><strong>{msg.user}</strong><span>: {msg.body}</span></li>
     )
     return (
-      <div className='chat-box'>
-        <ul>
-          {messages}
-        </ul>
-        <input id="message" type="text"/> <button onClick={()=>this.submitMessage()}>Send</button><br/>
+      <div className='chat-container'>
+        <div className='chat-box'>
+          <ul>
+            {messages}
+          </ul>
+        </div>
+        <input id="message" type="text"/> <button class="sendButton" onClick={()=>this.submitMessage()}>Send</button><br/>
       </div>
     );
   }

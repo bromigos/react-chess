@@ -23,5 +23,6 @@ Games.fetchPosition = function() {
 		.from('moves')
 		.where({game_id: game_id})
 		.orderBy('move_id', 'desc')
-		.limit(1);
+		.limit(1)
+    .then(x=>x)
 }
