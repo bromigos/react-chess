@@ -13,7 +13,11 @@ io.on('connection', function(client){
     console.log('message');
     io.emit('receive-message', msg);
   })
-  client.on('move', data=>io.emit('move',data));
+  client.on('move', data=>{
+	client.broadcast.emit('move',data.moveObj);
+	console.log(data.pgnString);
+  });
+  	
   client.on('connect', data=>console.log(data));
 });
 
