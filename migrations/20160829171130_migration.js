@@ -16,9 +16,10 @@ exports.up = function(knex, Promise) {
       table.string('turn_time');
       table.boolean('real_time');
       table.string('position'); //pgnString
+      table.boolean('inProgress');
     }),
     knex.schema.createTable('messages', function(table){
-      table.increments('message_id');
+      table.increments('message_id').primary();
       table.string('content');
       table.string('user_id');
       table.string('game_id');
