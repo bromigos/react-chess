@@ -58,7 +58,7 @@ export default class ChessBoardComponent extends React.Component{
 
     var start;
     var chessGame;
-    if(this.props.pgn){
+    if(this.props.pgn!=='start'){
       chessGame = new Chess();
       chessGame.load_pgn(this.props.pgn);
       start = chessGame.fen();
@@ -72,13 +72,16 @@ export default class ChessBoardComponent extends React.Component{
       dropOffBoard: 'snapback', // this is the default
       position: startingPosition,
       onDrop: this.onDrop.bind(this),
-      onDragStart: this.onDragStart.bind(this)
+      onDragStart: this.onDragStart.bind(this),
+      orientation: this.props.everything.orientation
    };
+   console.log(JSON.stringify(this.props.everything.orientation));
    if(startingPosition==='start')
       startingPosition = undefined;
     this.state = {  chess:      new Chess(startingPosition), 
                     chessBoard:  new ChessBoard('board1',cfg),
-                    uuid: this.props.uuid
+                    uuid: this.props.uuid,
+                    orientation: this.props.everything.orientation
   };
   console.log(this.state.chess.turn());
   }

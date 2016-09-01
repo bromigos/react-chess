@@ -52,16 +52,16 @@ var pgn = `[Event "Chessboard Editor at Apronus.com"]
 [Black "?"]
 [Result "*"]
 [SetUp "1"]
-[FEN "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1"]`;
+[FEN "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"]`;
 
 
 
 	var testResponse = {
 		game_id: 666,
 		user1_id: 1,
-		user2_id: 2,
-		user1_orientation: 'black',
-		user2_orientation: 'white',
+		user2_id: "99fa22b1-492b-45df-8ffe-9c3f96607051",
+		user1_orientation: 'white',
+		user2_orientation: 'black',
 		turn_time: '6',
 		real_time: '0',
 		position: pgn,

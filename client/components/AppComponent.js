@@ -45,10 +45,10 @@ export default class AppComponent extends React.Component{
     //initObj { username: , 
 
       console.log(initObj);
-
+      
      
       // make sure render() access state
-      this.setState(Object.assign(initObj,{loading: false, pgn: initObj.position }))  ;
+      this.setState(Object.assign(initObj,{ everything: initObj, loading: false, pgn: initObj.position }));
    });
   }
 
@@ -65,7 +65,7 @@ export default class AppComponent extends React.Component{
         return (
           <div>
          {/* <NavComponent /> */}
-           <ChessboardComponent socket={socket} uuid={this.state.uuid} pgn={this.state.pgn} />
+           <ChessboardComponent socket={socket} uuid={this.state.uuid} pgn={this.state.pgn} everything={this.state.everything} />
            <Chat username={this.state.username} socket={socket}/ >
         </div>);
       }

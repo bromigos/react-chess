@@ -24,13 +24,32 @@ Main.initialize = function(uuid,client){
 	
 	if(Games.getGameByUUID(uuid)){ //check if they in-game
 		// 1. emit init obj
-		// ==> {username, }
+
+
+
 		var initObj = Object.assign(Games.getGameByUUID(),{uuid: uuid});
+
+		//TO DO:
+		// ==> {username}
+
+		initObj.username = 'Jacoby';
+
+		
+		var orientation = ['white','black'];
+		if(initObj.user1_id == uuid){
+			initObj.orientation = initObj.user1_orientation;
+		}
+		else
+			initObj.orientation = initObj.user2_orientation;
+
+
 		client.emit('init',initObj);
 	}
 	else {
 		// 1. Send init obj with blank game
 		console.log('getGameByUUID failed...');
+		
+			
 	}
 
 
@@ -41,15 +60,15 @@ Main.initialize = function(uuid,client){
 };
 
 
-Main.incomingMove = function(data){
+Main.incomingMove = function(data,client){
 	// 1. Validate move?
 	// 2. Send move to DB
 	// 2. Send move to opponent based on client hashmap
 
 	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
 	
-	// console.log('Move received from client ', data.uuid);
-	// client.broadcast.emit('move',data.moveObj);
+	console.log('Move received from client ', data.uuid);
+	 client.broadcast.emit('move',data.moveObj);
 	// console.log(data.pgnString);
 	console.log(data);
 };
