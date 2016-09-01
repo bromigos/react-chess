@@ -3,6 +3,7 @@ import React from 'react';
 import Chat from './Chat';
 import ChessboardComponent from './ChessboardComponent';
 import NavComponent from './NavComponent';
+import BackgroundComponent from './BackgroundComponent';
 
 var socket = require('socket.io-client')(document.location.href);
 
@@ -19,7 +20,7 @@ export default class AppComponent extends React.Component{
     socket.on('connect', function () {
       console.log('AppJS connected');
     }); 
-     var myUUID;
+    var myUUID;
 
     if(document.cookie && document.cookie.indexOf('uuid') > -1)
         myUUID = document.cookie.substring(document.cookie.indexOf('uuid')+5);
@@ -44,9 +45,10 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
-        <NavComponent />
-        <ChessboardComponent socket={socket} />
-        <Chat username={this.state.username} socket={socket}/ >
+        <BackgroundComponent />
+        // <NavComponent />
+        // <ChessboardComponent socket={socket} />
+        // <Chat username={this.state.username} socket={socket}/ >
       </div>
     );
   }

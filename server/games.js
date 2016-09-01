@@ -32,6 +32,7 @@ Games.getGameByUUID = function(uuid){
 	// 	.from('games')
 	// 	.where({user1_id: uuid})
 	// 	.orWhere({user2_id: uuid});
+  //  .andWhere({inProgress: true})
 
 //==================hopefully good code above, ignore below
       // table.string('game_id');
