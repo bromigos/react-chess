@@ -8,7 +8,8 @@ export default class Chat extends React.Component{
       room: {},
       messages: [],
       socket: this.props.socket,
-      user: this.props.username
+      user: this.props.username,
+      game_id: undefined
     };
   }
   componentDidMount(){
@@ -16,7 +17,7 @@ export default class Chat extends React.Component{
       var messages = this.state.messages;
       messages.push(msg);
       this.setState({messages: messages})
-      console.log(this.state.messages);
+      console.log("messages: ", this.state.messages);
     })
   }
 
@@ -24,8 +25,9 @@ export default class Chat extends React.Component{
     var body = document.getElementById("message").value;
     document.getElementById("message").value = ""
     var message = {
-      body: body,
-      user: this.state.user || "anonymous"
+      content: body,
+      user_id: this.state.user || "anonymous",
+      game_id: this.state.game || "lobby"
     }
     this.state.socket.emit('new-message', message);
   }
@@ -51,7 +53,7 @@ export default class Chat extends React.Component{
 
   render(){
     var messages = this.state.messages.map((msg)=>
-      <li><strong>{msg.user}</strong><span>: {msg.body}</span></li>
+      <li><strong>{msg.user_id}</strong><span>: {msg.content}</span></li>
     )
     return (
       <div className='chat-container'>
@@ -60,7 +62,7 @@ export default class Chat extends React.Component{
             {messages}
           </ul>
         </div>
-        <input id="message" type="text"/> <button class="sendButton" onClick={()=>this.submitMessage()}>Send</button><br/>
+        <input id="message" type="text"/> <button className="sendButton" onClick={()=>this.submitMessage()}>Send</button><br/>
       </div>
     );
   }

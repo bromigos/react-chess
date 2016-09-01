@@ -1,7 +1,6 @@
 
 var uuid = require('uuid');
 var Chats = require('./chat');
-
 var Main = require('./main');
 var io = Main.io;
 
@@ -34,9 +33,13 @@ io.on('connection', function(client){
   });
   
   client.on('new-message', function(msg){
+<<<<<<< HEAD
+    Main.incomingChat(); // params?
+=======
     console.log('msg:', msg);
     Chats.insert(msg);
     io.emit('receive-message', msg);
+>>>>>>> 34960d9e9c4b6b3b31068031051c034b3cb58889
   })
   client.on('move', data=>{
   	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
