@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 // Import React component from Chat
 import Chat from './Chat';
 import ChessboardComponent from './ChessboardComponent';
