@@ -1,6 +1,6 @@
 
 var uuid = require('uuid');
-
+var Chats = require('./chat');
 var Main = require('./main');
 var io = Main.io;
 
@@ -22,7 +22,7 @@ io.on('connection', function(client){
   
   client.on('new-message', function(msg){
     console.log('msg:', msg);
-    // Chats.insert(msg)
+    Chats.insert(msg);
     io.emit('receive-message', msg);
   })
   client.on('move', data=>{
