@@ -34,8 +34,6 @@ Main.initialize = function(uuid,client){
 
 		initObj.username = 'Jacoby';
 
-		
-		var orientation = ['white','black'];
 		if(initObj.user1_id == uuid){
 			initObj.orientation = initObj.user1_orientation;
 		}
