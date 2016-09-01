@@ -25,11 +25,11 @@ io.on('connection', function(client){
   	client.emit('uuid',uuid.v4());
   
   client.on('uuid', uuid=> {
-  	clients[uuid] = client;
+  	//clients[uuid] = client;
   	console.log("uuid: ", uuid, ' added.');
   	
     // once UUID is received, start the actual init process
-    //Main.initialize()
+    Main.initialize(uuid)
 
   });
   

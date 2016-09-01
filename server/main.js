@@ -13,14 +13,23 @@ var Main = module.exports;
 Main.io = io;
 var socketio = require('./socketio');
 
-
+var Games = require('./Games');
 
 var count = 0;
 
 
-Main.initialize = function(){
+Main.initialize = function(uuid){
 	// 0. Wait for uuid to come back before firing this method
 	// 1. check for active game in DB
+	
+	if(Games.getGameByUUID(uuid)){ //check if they in-game
+		// 1. displaychessboard/position/chats
+	}
+	else {
+		// 1. show game setup
+	}
+
+
 	// 		Active? Join game
 	//		Not? 	show game setup
 
