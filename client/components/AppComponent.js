@@ -6,7 +6,6 @@ import NavComponent from './NavComponent';
 
 var socket = require('socket.io-client')(document.location.href);
 
-
 export default class AppComponent extends React.Component{
 
   constructor(props){

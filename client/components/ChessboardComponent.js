@@ -2,6 +2,7 @@ import React from 'react';
 
 var Chess = require('chess.js').Chess;
 var socket;
+
 export default class ChessBoardComponent extends React.Component{
 
 
