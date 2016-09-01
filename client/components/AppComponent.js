@@ -15,6 +15,9 @@ export default class AppComponent extends React.Component{
       username: prompt('Please enter a username!')
     }
   }
+  getInitialState(){
+    this.state.loading = true;
+  }
 
   componentWillMount(){
     socket.on('connect', function () {
@@ -27,25 +30,47 @@ export default class AppComponent extends React.Component{
     // server sends UUID to every user, even ones that might have an existing cookie
     // if we have UUID from cookie, ignore uuid given.
     // Send back whatever UUID will be used by the client
+    this.state.uuid = myUUID;
     socket.on('uuid', uuid=> {
       if(myUUID===undefined){
           document.cookie = 'uuid=' + uuid + ';';
           myUUID = uuid;
           //console.log(document.cookie);
+        
       }
+     this.setState({uuid: myUUID});
       socket.emit('uuid',myUUID);
     });
+    socket.on('init', initObj=> { //initObj { gameId: 0, username: ...? }
+      // game setup or chessboard?
+      // make sure render() access state
+      this.setState(Object.assign(initObj,{loading: false});
+   });
   }
 
   componentDidMount(){
     console.log('this.state.username is: ', this.state.username);
     
   }
+   
+
+
+
+  waitUntilDoneLoading(){
+      if(!this.state.loading){
+        return (<NavComponent />
+           <ChessboardComponent socket={socket} uuid={this.state.uuid} />
+           <Chat username={this.state.username} socket={socket}/ >);
+      }
+      else {
+        return ( <BackgroundComponent /> );
+      }
+    }
 
   render(){
     return (
       <div id="container">
-        <BackgroundComponent />
+        {waitUntilDoneLoading()}
         // <NavComponent />
         // <ChessboardComponent socket={socket} />
         // <Chat username={this.state.username} socket={socket}/ >
