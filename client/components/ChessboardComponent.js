@@ -3,12 +3,14 @@ import React from 'react';
 var Chess = require('chess.js').Chess;
 var socket;
 
+
 export default class ChessBoardComponent extends React.Component{
 
 
   constructor(props){
     super(props);
     socket = this.props.socket;
+
   }
 
   onDragStart(source, piece, position, orientation) {
@@ -47,14 +49,24 @@ export default class ChessBoardComponent extends React.Component{
 
   componentDidMount(){
     
-    // socket.on('connect', function () {
-    //   console.log('Chessboard connected')
-    // });
+     // socket.on('connect', function () {
+     //   console.log('Chessboard connected')
+     // });
     socket.on('move', data=> this.incomingMove(data.moveObj, data.fenString) ); // incomingMoveHandler
     
-   
+    console.log(this.props.pgn);
 
-   var startingPosition = this.props.startPosition || 'start';
+    var start;
+    var chessGame;
+    if(this.props.pgn){
+      chessGame = new Chess();
+      chessGame.load_pgn(this.props.pgn);
+      start = chessGame.fen();
+    }
+    else
+      start = 'start';
+   
+   var startingPosition = start;
     var cfg = {
       draggable: true,
       dropOffBoard: 'snapback', // this is the default
@@ -66,7 +78,7 @@ export default class ChessBoardComponent extends React.Component{
       startingPosition = undefined;
     this.state = {  chess:      new Chess(startingPosition), 
                     chessBoard:  new ChessBoard('board1',cfg),
-                    uuid: myUUID
+                    uuid: this.props.uuid
   };
   console.log(this.state.chess.turn());
   }

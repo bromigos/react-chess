@@ -62,7 +62,7 @@ export default class Chat extends React.Component{
             {messages}
           </ul>
         </div>
-        <input id="message" type="text"/> <button className="sendButton" onClick={()=>this.submitMessage()}>Send</button><br/>
+        <input id="message" type="text"/> <button className="sendButton"  onClick={()=>this.submitMessage()}>Send</button><br/>
       </div>
     );
   }

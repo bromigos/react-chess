@@ -12,9 +12,11 @@ export default class AppComponent extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      username: prompt('Please enter a username!')
+      username: prompt('Please enter a username!'),
+      loading: true
     }
   }
+  
 
   componentWillMount(){
     socket.on('connect', function () {
@@ -27,28 +29,58 @@ export default class AppComponent extends React.Component{
     // server sends UUID to every user, even ones that might have an existing cookie
     // if we have UUID from cookie, ignore uuid given.
     // Send back whatever UUID will be used by the client
+    this.state.uuid = myUUID;
     socket.on('uuid', uuid=> {
       if(myUUID===undefined){
           document.cookie = 'uuid=' + uuid + ';';
           myUUID = uuid;
           //console.log(document.cookie);
+        
       }
+     this.setState({uuid: myUUID});
       socket.emit('uuid',myUUID);
     });
+    socket.on('init', initObj=> { 
+
+    //initObj { username: , 
+
+      console.log(initObj);
+
+     
+      // make sure render() access state
+      this.setState(Object.assign(initObj,{loading: false, pgn: initObj.position }))  ;
+   });
   }
 
   componentDidMount(){
     console.log('this.state.username is: ', this.state.username);
     
   }
+   
+
+
+
+  waitUntilDoneLoading(){
+      if(!this.state.loading){
+        return (
+          <div>
+         {/* <NavComponent /> */}
+           <ChessboardComponent socket={socket} uuid={this.state.uuid} pgn={this.state.pgn} />
+           <Chat username={this.state.username} socket={socket}/ >
+        </div>);
+      }
+      else {
+        return ( <BackgroundComponent /> );
+      }
+    }
 
   render(){
     return (
       <div id="container">
-        <BackgroundComponent />
-        // <NavComponent />
-        // <ChessboardComponent socket={socket} />
-        // <Chat username={this.state.username} socket={socket}/ >
+        {this.waitUntilDoneLoading()}
+        {/* <NavComponent />
+        // <ChessboardComponent socket={socket} pgn={this.state.pgn} />
+        // <Chat username={this.state.username} socket={socket}/ > */}
       </div>
     );
   }
