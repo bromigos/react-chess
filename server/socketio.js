@@ -40,7 +40,7 @@ io.on('connection', function(client){
   })
   client.on('move', data=>{
   	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
-	Main.incomingMove(data);
+	Main.incomingMove(data,client);
 	// console.log('Move received from client ', data.uuid);
 	// client.broadcast.emit('move',data.moveObj);
 	// console.log(data.pgnString);
