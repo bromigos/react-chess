@@ -4,7 +4,7 @@ import Chat from './Chat';
 import ChessboardComponent from './ChessboardComponent';
 import NavComponent from './NavComponent';
 
-var socket = require('socket.io-client')('http://localhost:4000');
+var socket = require('socket.io-client')(document.location.href);
 
 
 export default class AppComponent extends React.Component{

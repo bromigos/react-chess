@@ -15,7 +15,7 @@ exports.up = function(knex, Promise) {
       table.string('user2_orientation');
       table.string('turn_time');
       table.boolean('real_time');
-      table.string('position');
+      table.string('position'); //pgnString
     }),
     knex.schema.createTable('messages', function(table){
       table.string('message_id');
