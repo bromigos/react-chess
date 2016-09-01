@@ -15,7 +15,7 @@ Chats.fetchMessages = function(){
   return knex
     .select()
     .from('messages')
-    .where({game_id: game_id})
+    .where({game_id: 'lobby'})
     .orderBy('message_id', 'desc')
     .limit(25)
 }
