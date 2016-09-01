@@ -12,12 +12,11 @@ export default class AppComponent extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      username: prompt('Please enter a username!')
+      username: prompt('Please enter a username!'),
+      loading: true
     }
   }
-  getInitialState(){
-    this.state.loading = true;
-  }
+  
 
   componentWillMount(){
     socket.on('connect', function () {
@@ -41,10 +40,15 @@ export default class AppComponent extends React.Component{
      this.setState({uuid: myUUID});
       socket.emit('uuid',myUUID);
     });
-    socket.on('init', initObj=> { //initObj { gameId: 0, username: ...? }
-      // game setup or chessboard?
+    socket.on('init', initObj=> { 
+
+    //initObj { username: , 
+
+      console.log(initObj);
+
+     
       // make sure render() access state
-      this.setState(Object.assign(initObj,{loading: false});
+      this.setState(Object.assign(initObj,{loading: false, pgn: initObj.position }))  ;
    });
   }
 
@@ -58,9 +62,12 @@ export default class AppComponent extends React.Component{
 
   waitUntilDoneLoading(){
       if(!this.state.loading){
-        return (<NavComponent />
-           <ChessboardComponent socket={socket} uuid={this.state.uuid} />
-           <Chat username={this.state.username} socket={socket}/ >);
+        return (
+          <div>
+         {/* <NavComponent /> */}
+           <ChessboardComponent socket={socket} uuid={this.state.uuid} pgn={this.state.pgn} />
+           <Chat username={this.state.username} socket={socket}/ >
+        </div>);
       }
       else {
         return ( <BackgroundComponent /> );
@@ -70,10 +77,10 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
-        {waitUntilDoneLoading()}
-        // <NavComponent />
-        // <ChessboardComponent socket={socket} />
-        // <Chat username={this.state.username} socket={socket}/ >
+        {this.waitUntilDoneLoading()}
+        {/* <NavComponent />
+        // <ChessboardComponent socket={socket} pgn={this.state.pgn} />
+        // <Chat username={this.state.username} socket={socket}/ > */}
       </div>
     );
   }

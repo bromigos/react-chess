@@ -29,7 +29,7 @@ io.on('connection', function(client){
   	console.log("uuid: ", uuid, ' added.');
   	
     // once UUID is received, start the actual init process
-    Main.initialize(uuid)
+    Main.initialize(uuid,client);
 
   });
   

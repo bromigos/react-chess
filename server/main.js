@@ -18,15 +18,19 @@ var Games = require('./Games');
 var count = 0;
 
 
-Main.initialize = function(uuid){
+Main.initialize = function(uuid,client){
 	// 0. Wait for uuid to come back before firing this method
 	// 1. check for active game in DB
 	
 	if(Games.getGameByUUID(uuid)){ //check if they in-game
-		// 1. displaychessboard/position/chats
+		// 1. emit init obj
+		// ==> {username, }
+		var initObj = Object.assign(Games.getGameByUUID(),{uuid: uuid});
+		client.emit('init',initObj);
 	}
 	else {
-		// 1. show game setup
+		// 1. Send init obj with blank game
+		console.log('getGameByUUID failed...');
 	}
 
 
