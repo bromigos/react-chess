@@ -18,7 +18,7 @@ exports.up = function(knex, Promise) {
       table.string('position');
     }),
     knex.schema.createTable('messages', function(table){
-      table.string('message_id');
+      table.increments('message_id');
       table.string('content');
       table.string('user_id');
       table.string('game_id');
