@@ -6,24 +6,28 @@ var io = Main.io;
 
 
 var clients = {
-
+    
 };	
+
 
 io.on('connection', function(client){
   	console.log('we have a connection!');
   	
+    // wait for UUID to init client
+
   	client.emit('uuid',uuid.v4());
   
   client.on('uuid', uuid=> {
   	clients[uuid] = client;
   	console.log("uuid: ", uuid, ' added.');
-  	//console.log("Clients:",clients);
+  	
+    // once UUID is received, start the actual init process
+    //Main.initialize()
+
   });
   
   client.on('new-message', function(msg){
-    console.log('msg:', msg);
-    // Chats.insert(msg)
-    io.emit('receive-message', msg);
+    Main.incomingChat(); // params?
   })
   client.on('move', data=>{
   	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
