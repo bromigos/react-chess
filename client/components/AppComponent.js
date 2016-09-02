@@ -62,6 +62,16 @@ export default class AppComponent extends React.Component{
     socket.emit('new-game', this.state.uuid);
   }
 
+  joinGame(){
+    var gameId = document.getElementById("join-game").value;
+    console.log(gameId);
+    var userObj = {
+      uuid: this.state.uuid,
+      game_id: gameId
+    }
+    socket.emit('join-game', userObj);
+  }
+
 
   waitUntilDoneLoading(){
       
@@ -92,6 +102,7 @@ export default class AppComponent extends React.Component{
     return (
       <div id="container">
         <button onClick={()=>this.createGame()}>Create Game</button><br/>
+        <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />

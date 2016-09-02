@@ -42,13 +42,23 @@ io.on('connection', function(client){
 
   client.on('new-game', function(msg){
     console.log('new game creation attempted', msg);
+    var game_id = Math.floor(Math.random()*1000000000);
+    console.log(game_id);
     var newGameObj = {
+      game_id: game_id,
       user1_id: msg,
+      user2_id: 0,
       user1_orientation: 'white',
       user2_orientation: 'black',
-      position: 'start'
+      position: 'start',
+      inProgress: true
     }
     Games.create(newGameObj);
+  })
+
+  client.on('join-game', function(newUserObj){
+    console.log('join game attempted with game ID: ', newUserObj);
+    Games.addUser(newUserObj);
   })
 
   client.on('move', data=>{
