@@ -24,6 +24,7 @@ export default class AppComponent extends React.Component{
 
   componentWillMount(){
     socket.on('connect', function () {
+
       console.log('AppJS connected');
     }); 
      console.log('this.state.username is: ', this.state.username);
@@ -128,8 +129,8 @@ export default class AppComponent extends React.Component{
         {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
-        // <ChessboardComponent socket={socket} pgn={this.state.pgn} />
-        // <Chat username={this.state.username} socket={socket}/ > */}
+        // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}
+        <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} />
       </div>
     );
   }
