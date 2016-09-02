@@ -75,11 +75,19 @@ io.on('connection', function(client){
   })
 
   client.on('move', data=>{
-  	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
-	Main.incomingMove(data,client);
-	// console.log('Move received from client ', data.uuid);
-	// client.broadcast.emit('move',data.moveObj);
-	// console.log(data.pgnString);
+    Games.getGameByUUID(data.uuid)
+      .then(x=>{
+        var moveData = {
+          game_id: x[0].game_id,
+          position: data.pgnString
+        }
+        return Games.update(moveData);
+      })
+    // Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
+    Main.incomingMove(data,client);
+    // console.log('Move received from client ', data.uuid);
+    // client.broadcast.emit('move',data.moveObj);
+    // console.log(data.pgnString);
   	
   });
   	

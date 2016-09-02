@@ -19,9 +19,10 @@ Games.addUser = function(user) {
 }
 
 Games.update = function(move) {
+  console.log("move: ", move)
   return knex('games')
-    .where({game_id: game_id})
-    .update({position: move.pgnString})
+    .where({game_id: move.game_id})
+    .update({position: move.position})
 }
 
 Games.checkForOpponent = function(gameId) {

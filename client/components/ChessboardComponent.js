@@ -10,7 +10,6 @@ export default class ChessBoardComponent extends React.Component{
   constructor(props){
     super(props);
     socket = this.props.socket;
-
   }
 
   onDragStart(source, piece, position, orientation) {
