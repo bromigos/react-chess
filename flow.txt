@@ -17,4 +17,5 @@ Client 2 goes to /:gameid
 -- gameWasOpen? set UUID of client 2 in db for gameId
 -- 	Set orientation for game. set in db, 
 -- UUID matches? 
-	-server emits chats & gamePgn/'start'(randomly chosen orientation included) to both clients
+	-server emits chats & gamePgn/'start'(randomly chosen orientation included) to both clients\
+	--sup?
