@@ -61,7 +61,9 @@ export default class AppComponent extends React.Component{
   }
 
   componentDidMount(){
-   
+    socket.on('game-status', error=> {
+      alert(error);
+    })
   }
   createGame(){
     var game_id = Math.floor(Math.random()*1000000000);

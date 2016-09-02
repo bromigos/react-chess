@@ -14,6 +14,7 @@ Games.create = function(game) {
 Games.addUser = function(user) { 
   return knex('games') 				
     .where({game_id: user.game_id})
+    .andWhere({user2_id: 0})
     .update({user2_id: user.uuid})
 }
 
@@ -21,6 +22,14 @@ Games.update = function(move) {
   return knex('games')
     .where({game_id: game_id})
     .update({position: move.pgnString})
+}
+
+Games.checkForOpponent = function(gameId) {
+  return knex
+    .select()
+    .from('games')
+    .where({game_id: gameId})
+    .andWhere({user2_id: 0})
 }
 
 Games.fetchPosition = function() {
