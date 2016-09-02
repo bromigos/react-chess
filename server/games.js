@@ -11,10 +11,12 @@ Games.create = function(game) {
   })
 }
 
-Games.addUser = function(user) {
+Games.addUser = function(userObj) {
+  console.log("user obj", userObj);
   return knex('games')
-    .where({game_id: game_id})
-    .update({user2_id: user})
+    .where({game_id: userObj.game_id})
+    .update({user2_id: userObj.uuid})
+    .then(x=>x)
 }
 
 Games.update = function(move) {

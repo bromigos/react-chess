@@ -8,13 +8,11 @@ exports.up = function(knex, Promise) {
       table.integer('num_losses');
   	}),
     knex.schema.createTable('games', function(table){
-      table.increments('game_id').primary();
+      table.integer('game_id');
       table.string('user1_id');
       table.string('user2_id');
       table.string('user1_orientation');
       table.string('user2_orientation');
-      table.string('turn_time');
-      table.boolean('real_time');
       table.string('position'); //pgnString
       table.boolean('inProgress');
     }),

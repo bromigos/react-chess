@@ -32,9 +32,6 @@ export default class Chat extends React.Component{
     this.state.socket.emit('new-message', message);
   }
 
-  createGame(){
-    this.state.socket.emit('new-game');
-  }
   // pickUser(){
   //   var user = document.getElementById("user").value;
   //   this.setState({user: user})
