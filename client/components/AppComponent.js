@@ -72,7 +72,7 @@ export default class AppComponent extends React.Component{
     }
     socket.emit('new-game', createObj);
     this.state.yourGame = game_id;
-    console.log(this.state.yourGame);
+    console.log("your game is: ", this.state.yourGame);
     this.setState({gameCreated: false, showModal: false});
   }
 
