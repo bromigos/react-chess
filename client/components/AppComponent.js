@@ -24,11 +24,9 @@ export default class AppComponent extends React.Component{
       console.log('AppJS connected');
     }); 
      console.log('this.state.username is: ', this.state.username);
+    socket.on('test_socket', data=> console.log(data));
+
     socket.on('init', initObj=> { 
-
-    //initObj { username: , 
-   
-
       /// having some sort of async issue with initObj being blank
 
       console.log('initObj: ',initObj);
