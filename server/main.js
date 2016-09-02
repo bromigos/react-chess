@@ -24,7 +24,7 @@ Main.initialize = function(uuid,client){
 	
 	if(Games.getGameByUUID(uuid)){ //check if they in-game
 		// 1. emit init obj
-
+	//if(false){
 
 
 		var initObj = Object.assign(Games.getGameByUUID(),{uuid: uuid});
@@ -46,8 +46,7 @@ Main.initialize = function(uuid,client){
 	else {
 		// 1. Send init obj with blank game
 		console.log('getGameByUUID failed...');
-		
-			
+		client.emit('init', {showSetup: true, uuid: uuid});
 	}
 
 
@@ -95,18 +94,18 @@ app.get('/app-bundle.js',
   })
 );
 
-//endpoint for testing only
+//endpoints for testing only
 
-app.get('/game_1785', function(req,res) {
+// app.get('/game_1785', function(req,res) {
+// 	// 
+// });
 
-});
 
-
-app.get('/game_*', function(req,res) { // responds to /game_:gameid
-	var gameId = req.url.substring(req.url.lastIndexOf('/game_')+6);
-	console.log(gameId);
-	res.end(gameId);
-});
+// app.get('/game_*', function(req,res) { // responds to /game_:gameid
+// 	var gameId = req.url.substring(req.url.lastIndexOf('/game_')+6);
+// 	console.log(gameId);
+// 	res.end(gameId);
+// });
 
 
 

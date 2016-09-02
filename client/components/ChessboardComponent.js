@@ -73,15 +73,15 @@ export default class ChessBoardComponent extends React.Component{
       position: startingPosition,
       onDrop: this.onDrop.bind(this),
       onDragStart: this.onDragStart.bind(this),
-      orientation: this.props.everything.orientation
+      orientation: this.props.orientation
    };
-   console.log(JSON.stringify(this.props.everything.orientation));
+   console.log(JSON.stringify(this.props.orientation));
    if(startingPosition==='start')
       startingPosition = undefined;
     this.state = {  chess:      new Chess(startingPosition), 
                     chessBoard:  new ChessBoard('board1',cfg),
                     uuid: this.props.uuid,
-                    orientation: this.props.everything.orientation
+                    orientation: this.props.orientation
   };
   console.log(this.state.chess.turn());
   }
