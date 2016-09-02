@@ -43,7 +43,9 @@ export default class AppComponent extends React.Component{
     socket.on('init', initObj=> { 
 
     //initObj { username: , 
-
+      
+      
+        
       console.log(initObj);
       
      
@@ -62,11 +64,22 @@ export default class AppComponent extends React.Component{
 
 
   waitUntilDoneLoading(){
-      if(!this.state.loading){
+      
+      
+      if(!this.state.loading && this.state.showSetup){
+        return (
+          <div>
+          <p>Show setup</p>
+          {/* <GameSetupComponent uuid={this.state.uuid} /> */}
+        </div>
+        );
+      }
+
+      else if(!this.state.loading){
         return (
           <div>
          {/* <NavComponent /> */}
-           <ChessboardComponent socket={socket} uuid={this.state.uuid} pgn={this.state.pgn} everything={this.state.everything} />
+           <ChessboardComponent socket={socket} orientation={this.state.everything.orientation} uuid={this.state.uuid} pgn={this.state.pgn} everything={this.state.everything} />
            <Chat username={this.state.username} socket={socket}/ >
         </div>);
       }
