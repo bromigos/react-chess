@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
       table.integer('num_losses');
   	}),
     knex.schema.createTable('games', function(table){
-      table.string('game_id');
+      table.increments('game_id').primary();
       table.string('user1_id');
       table.string('user2_id');
       table.string('user1_orientation');

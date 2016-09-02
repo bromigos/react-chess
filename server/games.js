@@ -4,17 +4,23 @@ var knex = require('knex')(config[env]);
 var Games = module.exports;
 
 Games.create = function(game) {
-  return knex
-    .insert(game)
-    .into('games')
+  return knex.transaction(function(trx){
+    return trx
+      .insert(game)
+      .into('games')
+  })
 }
 
-Games.insert = function(move) {
-	return knex.transaction(function(trx){
-		return trx
-			.insert(move)
-			.into('moves')
-	})
+Games.addUser = function(user) {
+  return knex('games')
+    .where({game_id: game_id})
+    .update({user2_id: user})
+}
+
+Games.update = function(move) {
+  return knex('games')
+    .where({game_id: game_id})
+    .update({position: move.pgnString})
 }
 
 Games.fetchPosition = function() {
