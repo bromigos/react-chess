@@ -75,7 +75,7 @@ export default class ChessBoardComponent extends React.Component{
       onDragStart: this.onDragStart.bind(this),
       orientation: this.props.orientation
    };
-   console.log(JSON.stringify(this.props.orientation));
+   console.log('Starting game with orientation: ',this.props.orientation);
    if(startingPosition==='start')
       startingPosition = undefined;
     this.state = {  chess:      new Chess(startingPosition), 
@@ -83,7 +83,7 @@ export default class ChessBoardComponent extends React.Component{
                     uuid: this.props.uuid,
                     orientation: this.props.orientation
   };
-  console.log(this.state.chess.turn());
+  //console.log(this.state.chess.turn());
   }
 
 

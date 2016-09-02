@@ -39,8 +39,8 @@ io.on('connection', function(client){
     Chats.insert(msg);
     // UUID of original sender of message to server needed on next line!
 
-    //Main.getOppClientFromUuid().emit('receive-message',msg);
-    io.emit('receive-message', msg);
+    Main.getOppClientFromUuid(msg.uuid).emit('receive-message',msg);
+    //io.emit('receive-message', msg);
   })
 
   client.on('new-game', function(msg){

@@ -35,14 +35,13 @@ Main.initialize = function(uuid,client){
 	// 	uuidToClient[key].emit('test_socket',{count: count++, uuids: Object.keys(uuidToClient)});
 	// }
 	// ok to delete / ignore this
-
 	Games.getGameByUUID(uuid).then(gameRow => {
-		
+		console.log("gameRow",gameRow);
 		if(gameRow.length>0){ //check if they in-game
 		// 1. emit init obj
 	//if(false){
 
-		var initObj = Object.assign(gameRow,{uuid: uuid});
+		var initObj = Object.assign(gameRow[0],{uuid: uuid});
 
 		//TO DO:
 		// ==> {username}
@@ -67,7 +66,7 @@ Main.initialize = function(uuid,client){
 		
 		// we need to send a real blank init object so we don't have the problems
 		// that we are now having. 
-		 client.emit('init', Object.assign(initObj,{position: 'start', orientation: 'white' }));
+		 client.emit('init', Object.assign(initObj,{position: 'start' }));
 	}
 	else {
 		// 1. Send init obj with blank game
