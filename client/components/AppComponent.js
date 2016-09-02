@@ -4,6 +4,8 @@ import Chat from './Chat';
 import ChessboardComponent from './ChessboardComponent';
 import NavComponent from './NavComponent';
 import BackgroundComponent from './BackgroundComponent';
+import CreateGame from './CreateGame';
+import JoinGame from './JoinGame';
 
 var socket = require('socket.io-client')(document.location.href);
 
@@ -68,7 +70,7 @@ export default class AppComponent extends React.Component{
     socket.emit('new-game', createObj);
     this.state.yourGame = game_id;
     console.log(this.state.yourGame);
-    this.setState({gameCreated: false});
+    this.setState({gameCreated: false, showModal: false});
   }
 
   joinGame(){
@@ -115,7 +117,8 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
-        <button onClick={()=>this.createGame()}>Create Game</button><br/>
+        {/*<button onClick={()=>this.createGame()}>Create Game</button><br/>*/}
+        <CreateGame showModal={false} fn={this.createGame}/>
         <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>
         {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
