@@ -9,6 +9,7 @@ import CreateGame from './CreateGame';
 import JoinGame from './JoinGame';
 
 var socket = require('socket.io-client')(document.location.href);
+var ButtonToolbar = require("react-bootstrap/lib/ButtonToolbar");
 
 export default class AppComponent extends React.Component{
 
@@ -121,8 +122,10 @@ export default class AppComponent extends React.Component{
       <div id="container">
         {/*<button onClick={()=>this.createGame()}>Create Game</button><br/>
         <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>*/}
-        <CreateGame showModal={false} fn={this.createGame}/>
-        <JoinGame showModal={false} fn={this.joinGame}/>
+        <ButtonToolbar>
+          <CreateGame showModal={false} fn={this.createGame}/>
+          <JoinGame showModal={false} fn={this.joinGame}/>
+        </ButtonToolbar>
         {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />

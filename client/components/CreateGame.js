@@ -41,8 +41,8 @@ export default class CreateGame extends React.Component{
     return (
       <div className='create-modal'>
         <Button
-          bsStyle="secondary"
-          bsSize="large"
+          bsStyle="default"
+          bsSize="small"
           onClick={this.open.bind(this)}
         >
           Create Game
