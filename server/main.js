@@ -17,37 +17,58 @@ var Games = require('./Games');
 
 var count = 0;
 
+var uuidToClient = {};
+var oppUuidToClient = {};
 
 Main.initialize = function(uuid,client){
 	// 0. Wait for uuid to come back before firing this method
 	// 1. check for active game in DB
-	
-	if(Games.getGameByUUID(uuid)){ //check if they in-game
+	uuidToClient[uuid] = client;
+	console.log(Object.keys(uuidToClient));
+	Games.getGameByUUID(uuid).then(gameRow => {
+		
+		if(gameRow.length>0){ //check if they in-game
 		// 1. emit init obj
 	//if(false){
 
-
-		var initObj = Object.assign(Games.getGameByUUID(),{uuid: uuid});
+		var initObj = Object.assign(gameRow,{uuid: uuid});
 
 		//TO DO:
 		// ==> {username}
 
-		initObj.username = 'Jacoby';
+		//initObj.username = 'Jacoby';
+		var oppUUID = initObj.user1_id == uuid ? initObj.user2_id : initObj.user1_id;
 
 		if(initObj.user1_id == uuid){
 			initObj.orientation = initObj.user1_orientation;
+			 oppUuidToClient[initObj.user2_id] = client;
+			 oppUuidToClient[uuid] = uuidToClient[initObj.user1_id];
 		}
-		else
+		else{
 			initObj.orientation = initObj.user2_orientation;
+			 oppUuidToClient[initObj.user1_id] = client;
+			 oppUuidToClient[uuid] = uuidToClient[initObj.user1_id];
+		}
 
-
-		client.emit('init',initObj);
+		//console.log(uuidToClient[uuid]===client);
+		//console.log(oppUuidToClient[oppUUID]);
+		
+		
+		// we need to send a real blank init object so we don't have the problems
+		// that we are now having. 
+		 client.emit('init', Object.assign(initObj,{position: 'start', orientation: 'white' }));
 	}
 	else {
 		// 1. Send init obj with blank game
 		console.log('getGameByUUID failed...');
 		client.emit('init', {showSetup: true, uuid: uuid});
 	}
+
+	}); // end of .then()
+	
+	
+
+	
 
 
 	// 		Active? Join game
@@ -65,7 +86,9 @@ Main.incomingMove = function(data,client){
 	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
 	
 	console.log('Move received from client ', data.uuid);
-	 client.broadcast.emit('move',data.moveObj);
+	
+	oppUuidToClient[data.uuid].emit('move',data.moveObj);
+	// client.broadcast.emit('move',data.moveObj);
 	// console.log(data.pgnString);
 	console.log(data);
 };
