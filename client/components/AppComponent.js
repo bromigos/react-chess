@@ -121,8 +121,8 @@ export default class AppComponent extends React.Component{
       <div id="container">
         {/*<button onClick={()=>this.createGame()}>Create Game</button><br/>
         <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>*/}
-        <CreateGame showModal={false} fn={this.createGame}/>
-        <JoinGame showModal={false} fn={this.joinGame}/>
+        <CreateGame showModal={false} fn={this.createGame} />
+        <JoinGame showModal={false} fn={this.joinGame} />
         {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />

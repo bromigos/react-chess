@@ -58,7 +58,10 @@ io.on('connection', function(client){
       position: 'start',
       inProgress: true
     }
-    Games.create(newGameObj);
+    Games.create(newGameObj).then(x=>{
+      console.log('game created: ',x);
+      Main.initialize(msg.uuid, client);
+    });
   })
 
   client.on('join-game', function(newUserObj){
