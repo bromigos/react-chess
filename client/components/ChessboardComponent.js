@@ -14,7 +14,10 @@ export default class ChessBoardComponent extends React.Component{
   }
 
   onDragStart(source, piece, position, orientation) {
-    orientation = this.state.chess.turn()==='b' ? 'black' : 'white';
+    //orientation = this.state.chess.turn()==='b' ? 'black' : 'white';
+    var colorToMove = this.state.chess.turn()=='w' ? 'white' : 'black';
+    //console.log(piece,orientation);
+if(colorToMove !== this.state.orientation) return false;
   if ((orientation === 'white' && piece.search(/^w/) === -1) ||
       (orientation === 'black' && piece.search(/^b/) === -1)) {
     return false;

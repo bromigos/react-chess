@@ -97,6 +97,9 @@ Main.incomingMove = function(data,client){
 	
 	console.log('Move received from client ', data.uuid);
 	
+	// db update call ==>
+	// Games.getGameIdByUuid().then(=>Games.update({pgn: data.pgn});
+	//
 	oppUuidToClient[data.uuid].emit('move',data.moveObj);
 	// client.broadcast.emit('move',data.moveObj);
 	// console.log(data.pgnString);

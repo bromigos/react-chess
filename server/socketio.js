@@ -36,10 +36,14 @@ io.on('connection', function(client){
   
   client.on('new-message', function(msg){
     console.log('msg:', msg);
-    Chats.insert(msg);
+   var newMessage = Object.assign({}, msg);
+   delete newMessage.uuid;
+    console.log('better?: ', newMessage);
+    Main.getOppClientFromUuid(msg.uuid).emit('receive-message',msg);
+    Chats.insert(newMessage);
     // UUID of original sender of message to server needed on next line!
 
-    Main.getOppClientFromUuid(msg.uuid).emit('receive-message',msg);
+    
     //io.emit('receive-message', msg);
   })
 
