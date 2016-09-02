@@ -20,11 +20,22 @@ var count = 0;
 var uuidToClient = {};
 var oppUuidToClient = {};
 
+Main.getOppClientFromUuid = function(uuid){
+	var newClient = oppUuidToClient[uuid];
+	return newClient == undefined ? null : newClient;
+}
+
 Main.initialize = function(uuid,client){
 	// 0. Wait for uuid to come back before firing this method
 	// 1. check for active game in DB
 	uuidToClient[uuid] = client;
-	console.log(Object.keys(uuidToClient));
+	
+	// safely ignore -- just for testing.
+	// for(var key in uuidToClient){
+	// 	uuidToClient[key].emit('test_socket',{count: count++, uuids: Object.keys(uuidToClient)});
+	// }
+	// ok to delete / ignore this
+
 	Games.getGameByUUID(uuid).then(gameRow => {
 		
 		if(gameRow.length>0){ //check if they in-game
