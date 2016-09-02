@@ -46,7 +46,7 @@ export default class JoinGame extends React.Component{
     return (
       <div className='join-modal'>
         <Button
-          bsStyle="secondary"
+          bsStyle="default"
           bsSize="small"
           onClick={this.open.bind(this)}
         >
@@ -54,18 +54,18 @@ export default class JoinGame extends React.Component{
         </Button>
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
           <Modal.Header closeButton>
-            <Modal.Title>Join Game</Modal.Title>
+            <Modal.Title>Join Game <OverlayTrigger overlay={tooltip}><a href="#">Id</a></OverlayTrigger></Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <h4>Enter a Game</h4>
             <form>
              <FormGroup bsSize="large">
-              <FormControl ref='input' placeholder="Game id" /><Button onClick={this.props.fn.bind(this)}>
+              <FormControl ref='input' placeholder="Game id" /><br />
+              <Button onClick={this.props.fn.bind(this)}>
                   Submit
               </Button>
              </FormGroup>
             </form>
-            <p>Enter a game <OverlayTrigger overlay={tooltip}><a href="#">id</a></OverlayTrigger></p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close.bind(this)}>Close</Button>
