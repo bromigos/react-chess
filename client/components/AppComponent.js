@@ -92,7 +92,11 @@ export default class AppComponent extends React.Component{
       if(!this.state.loading && this.state.showSetup){
         return (
           <div>
-          <p>Show setup</p>
+          <ButtonToolbar>
+          <CreateGame showModal={false} fn={this.createGame}/>
+          <JoinGame showModal={false} fn={this.joinGame}/>
+        </ButtonToolbar>
+        <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} />
           {/* <GameSetupComponent uuid={this.state.uuid} /> */}
         </div>
         );
@@ -103,7 +107,7 @@ export default class AppComponent extends React.Component{
           <div>
          {/* <NavComponent /> */}
            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} />
-           <Chat username={this.state.username} socket={socket} uuid={this.state.uuid}/>
+           <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} />
         </div>);
       }
       else {
@@ -122,15 +126,11 @@ export default class AppComponent extends React.Component{
       <div id="container">
         {/*<button onClick={()=>this.createGame()}>Create Game</button><br/>
         <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>*/}
-        <ButtonToolbar>
-          <CreateGame showModal={false} fn={this.createGame}/>
-          <JoinGame showModal={false} fn={this.joinGame}/>
-        </ButtonToolbar>
         {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
-        // <ChessboardComponent socket={socket} pgn={this.state.pgn} />
-        // <Chat username={this.state.username} socket={socket}/ > */}
+         <ChessboardComponent socket={socket} pgn={this.state.pgn} />
+        <Chat username={this.state.username} socket={socket}/ > */}
       </div>
     );
   }
