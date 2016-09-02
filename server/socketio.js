@@ -59,7 +59,14 @@ io.on('connection', function(client){
 
   client.on('join-game', function(newUserObj){
     console.log('join game attempted with game ID: ', newUserObj);
-    Games.addUser(newUserObj).then(x=>console.log('added user',newUserObj));
+    Games.checkForOpponent(newUserObj.game_id)
+      .then(x=>{
+        if(x.length > 0){
+          Games.addUser(newUserObj).then(x=>console.log('added user',newUserObj));
+        } else {
+          io.emit('game-status', 'The chosen game is full.')
+        }
+      })
   })
 
   client.on('move', data=>{
