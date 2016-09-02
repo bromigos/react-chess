@@ -37,7 +37,10 @@ io.on('connection', function(client){
   client.on('new-message', function(msg){
     console.log('msg:', msg);
     Chats.insert(msg);
-    io.emit('receive-message', msg);
+    // UUID of original sender of message to server needed on next line!
+
+    Main.getOppClientFromUuid(msg.uuid).emit('receive-message',msg);
+    //io.emit('receive-message', msg);
   })
 
   client.on('new-game', function(msg){
@@ -56,7 +59,7 @@ io.on('connection', function(client){
 
   client.on('join-game', function(newUserObj){
     console.log('join game attempted with game ID: ', newUserObj);
-    Games.addUser(newUserObj);
+    Games.addUser(newUserObj).then(x=>console.log('added user',newUserObj));
   })
 
   client.on('move', data=>{

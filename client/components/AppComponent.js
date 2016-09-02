@@ -26,7 +26,8 @@ export default class AppComponent extends React.Component{
       console.log('AppJS connected');
     }); 
      console.log('this.state.username is: ', this.state.username);
-    socket.on('test_socket', data=> console.log(data));
+    
+    socket.on('test_socket', data=> console.log("test socket data: ",data));
 
     socket.on('init', initObj=> { 
       /// having some sort of async issue with initObj being blank
@@ -85,7 +86,6 @@ export default class AppComponent extends React.Component{
 
 
   waitUntilDoneLoading(){
-      
       if(!this.state.loading && this.state.showSetup){
         return (
           <div>
@@ -100,7 +100,7 @@ export default class AppComponent extends React.Component{
           <div>
          {/* <NavComponent /> */}
            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} />
-           <Chat username={this.state.username} socket={socket}/ >
+           <Chat username={this.state.username} socket={socket} uuid={this.state.uuid}/>
         </div>);
       }
       else {

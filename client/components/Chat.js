@@ -27,7 +27,8 @@ export default class Chat extends React.Component{
     var message = {
       content: body,
       user_id: this.state.user || "anonymous",
-      game_id: this.state.game || "lobby"
+      game_id: this.state.game || "lobby",
+      uuid: this.props.uuid
     }
     this.state.socket.emit('new-message', message);
   }
