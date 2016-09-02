@@ -54,6 +54,7 @@ export default class CreateGame extends React.Component{
           </Modal.Header>
           <Modal.Body>
             <h4>Select a time option</h4>
+            <Radio onClick={ this.props.fn.bind(this) }> Untimed </Radio>
             <Radio onClick={ this.enter.bind(this, 15) }> 15 mins </Radio>
             <Radio onClick={ this.enter.bind(this, 30) }> 30 mins </Radio>
             <Radio onClick={ this.enter.bind(this, 60) }> 60 mins </Radio>
