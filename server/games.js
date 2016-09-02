@@ -11,8 +11,8 @@ Games.create = function(game) {
   })
 }
 
-Games.addUser = function(user) { // where does game_id come from?
-  return knex('games') 				// is 'user' correct param name?
+Games.addUser = function(user) { 
+  return knex('games') 				
     .where({game_id: user.game_id})
     .update({user2_id: user.uuid})
 }
