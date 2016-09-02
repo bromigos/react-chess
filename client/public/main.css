@@ -5,6 +5,10 @@
   padding-right: 30px;
 }
 
+.your-game {
+  size: 20px;
+}
+
 .chat-container {
   float: right;
   background:#ddd;

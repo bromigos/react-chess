@@ -13,7 +13,8 @@ export default class AppComponent extends React.Component{
     super(props);
     this.state = {
       username: prompt('Please enter a username!'),
-      loading: true
+      loading: true,
+      yourGame: undefined
     }
   }
   
@@ -59,7 +60,15 @@ export default class AppComponent extends React.Component{
     
   }
   createGame(){
-    socket.emit('new-game', this.state.uuid);
+    var game_id = Math.floor(Math.random()*1000000000);
+    var createObj = {
+      game_id: game_id,
+      uuid: this.state.uuid
+    }
+    socket.emit('new-game', createObj);
+    this.state.yourGame = game_id;
+    console.log(this.state.yourGame);
+    this.setState({gameCreated: false});
   }
 
   joinGame(){
@@ -98,11 +107,18 @@ export default class AppComponent extends React.Component{
       }
     }
 
+  renderGameCode(){
+    if(this.state.yourGame !== undefined){
+      return <div class="your-game"> Your game code is: {this.state.yourGame}</div>
+    }
+  }
+
   render(){
     return (
       <div id="container">
         <button onClick={()=>this.createGame()}>Create Game</button><br/>
         <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>
+        {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />
