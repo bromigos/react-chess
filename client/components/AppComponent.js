@@ -56,8 +56,9 @@ export default class AppComponent extends React.Component{
     console.log('this.state.username is: ', this.state.username);
     
   }
-   
-
+  createGame(){
+    socket.emit('new-game', this.state.uuid);
+  }
 
 
   waitUntilDoneLoading(){
@@ -77,6 +78,7 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
+        <button onClick={()=>this.createGame()}>Create Game</button><br/>
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />
