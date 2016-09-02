@@ -15,6 +15,8 @@ export default class AppComponent extends React.Component{
       username: prompt('Please enter a username!'),
       loading: true,
       yourGame: undefined
+      username: prompt('Please enter a username!')
+      loading: true
     }
   }
   
@@ -23,6 +25,7 @@ export default class AppComponent extends React.Component{
     socket.on('connect', function () {
       console.log('AppJS connected');
     }); 
+    this.state.loading = true;
     var myUUID;
 
     if(document.cookie && document.cookie.indexOf('uuid') > -1)
@@ -41,23 +44,23 @@ export default class AppComponent extends React.Component{
      this.setState({uuid: myUUID});
       socket.emit('uuid',myUUID);
     });
-    socket.on('init', initObj=> { 
-
-    //initObj { username: , 
-      
-      
-        
-      console.log(initObj);
-      
-     
-      // make sure render() access state
-      this.setState(Object.assign(initObj,{ everything: initObj, loading: false, pgn: initObj.position }));
-   });
+    
   }
 
   componentDidMount(){
     console.log('this.state.username is: ', this.state.username);
-    
+    socket.on('init', initObj=> { 
+
+    //initObj { username: , 
+   
+
+      /// having some sort of async issue with initObj being blank
+
+      console.log('initObj.showSetup: ',initObj);
+     
+      // make sure render() access state
+      this.setState(Object.assign(initObj,{ loading: false, pgn: initObj.position }));
+   });  
   }
   createGame(){
     var game_id = Math.floor(Math.random()*1000000000);
@@ -84,7 +87,6 @@ export default class AppComponent extends React.Component{
 
   waitUntilDoneLoading(){
       
-      
       if(!this.state.loading && this.state.showSetup){
         return (
           <div>
@@ -98,7 +100,7 @@ export default class AppComponent extends React.Component{
         return (
           <div>
          {/* <NavComponent /> */}
-           <ChessboardComponent socket={socket} orientation={this.state.everything.orientation} uuid={this.state.uuid} pgn={this.state.pgn} everything={this.state.everything} />
+           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} />
            <Chat username={this.state.username} socket={socket}/ >
         </div>);
       }

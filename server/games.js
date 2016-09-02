@@ -11,12 +11,10 @@ Games.create = function(game) {
   })
 }
 
-Games.addUser = function(userObj) {
-  console.log("user obj", userObj);
+Games.addUser = function(user) {
   return knex('games')
-    .where({game_id: userObj.game_id})
-    .update({user2_id: userObj.uuid})
-    .then(x=>x)
+    .where({game_id: game_id})
+    .update({user2_id: user})
 }
 
 Games.update = function(move) {
@@ -35,13 +33,13 @@ Games.fetchPosition = function() {
 }
 
 Games.getGameByUUID = function(uuid){
-	// return knex
-	// 	.select()
-	// 	.from('games')
-	// 	.where({user1_id: uuid})
-	// 	.orWhere({user2_id: uuid});
-  //  .andWhere({inProgress: true})
-
+	return knex
+		.select()
+		.from('games')
+		.where({user1_id: uuid})
+		.orWhere({user2_id: uuid})
+   .andWhere({inProgress: true});
+ }
 //==================hopefully good code above, ignore below
       // table.string('game_id');
       // table.string('user1_id');
@@ -52,33 +50,33 @@ Games.getGameByUUID = function(uuid){
       // table.boolean('real_time');
       // table.string('position'); //pgnString
 
-var pgn = `[Event "Chessboard Editor at Apronus.com"]
-[Site "http://www.apronus.com/chess/wbeditor.php"]
-[Date "2016.09.01"]
-[Round "-"]
-[White "?"]
-[Black "?"]
-[Result "*"]
-[SetUp "1"]
-[FEN "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"]`;
+// var pgn = `[Event "Chessboard Editor at Apronus.com"]
+// [Site "http://www.apronus.com/chess/wbeditor.php"]
+// [Date "2016.09.01"]
+// [Round "-"]
+// [White "?"]
+// [Black "?"]
+// [Result "*"]
+// [SetUp "1"]
+// [FEN "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"]`;
 
 
 
-	var testResponse = {
-		game_id: 666,
-		user1_id: 1,
-		user2_id: "99fa22b1-492b-45df-8ffe-9c3f96607051",
-		user1_orientation: 'white',
-		user2_orientation: 'black',
-		turn_time: '6',
-		real_time: '0',
-		position: pgn,
-		inProgress: true
-	};
+// 	var testResponse = {
+// 		game_id: 666,
+// 		user1_id: 1,
+// 		user2_id: "99fa22b1-492b-45df-8ffe-9c3f96607051",
+// 		user1_orientation: 'white',
+// 		user2_orientation: 'black',
+// 		turn_time: '6',
+// 		real_time: '0',
+// 		position: pgn,
+// 		inProgress: true
+// 	};
 
 
 
 
 
-	return testResponse; 
-}
+// 	return testResponse; 
+// }
