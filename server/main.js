@@ -27,8 +27,8 @@ Main.initialize = function(uuid,client){
 
 	
 	Games.getGameByUUID(uuid).then(gameRow => {
-		console.log('game-row:',gameRow==true);	
-		if(gameRow){ //check if they in-game
+		
+		if(gameRow.length>0){ //check if they in-game
 		// 1. emit init obj
 	//if(false){
 
@@ -61,7 +61,7 @@ Main.initialize = function(uuid,client){
 	}
 	else {
 		// 1. Send init obj with blank game
-		console.log('getGameByUUID failed...');
+			console.log('getGameByUUID failed...');
 		client.emit('init', {showSetup: true, uuid: uuid});
 	}
 

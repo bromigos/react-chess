@@ -15,8 +15,6 @@ export default class AppComponent extends React.Component{
       username: prompt('Please enter a username!'),
       loading: true,
       yourGame: undefined
-      username: prompt('Please enter a username!')
-      loading: true
     }
   }
   
@@ -25,6 +23,19 @@ export default class AppComponent extends React.Component{
     socket.on('connect', function () {
       console.log('AppJS connected');
     }); 
+     console.log('this.state.username is: ', this.state.username);
+    socket.on('init', initObj=> { 
+
+    //initObj { username: , 
+   
+
+      /// having some sort of async issue with initObj being blank
+
+      console.log('initObj: ',initObj);
+     
+      // make sure render() access state
+      this.setState(Object.assign(initObj,{ loading: false, pgn: initObj.position }));
+   });  
     this.state.loading = true;
     var myUUID;
 
@@ -48,19 +59,7 @@ export default class AppComponent extends React.Component{
   }
 
   componentDidMount(){
-    console.log('this.state.username is: ', this.state.username);
-    socket.on('init', initObj=> { 
-
-    //initObj { username: , 
    
-
-      /// having some sort of async issue with initObj being blank
-
-      console.log('initObj.showSetup: ',initObj);
-     
-      // make sure render() access state
-      this.setState(Object.assign(initObj,{ loading: false, pgn: initObj.position }));
-   });  
   }
   createGame(){
     var game_id = Math.floor(Math.random()*1000000000);
