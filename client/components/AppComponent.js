@@ -1,4 +1,5 @@
   import React from 'react';
+  import ReactDOM from 'react-dom';
 // Import React component from Chat
 import Chat from './Chat';
 import ChessboardComponent from './ChessboardComponent';
@@ -75,13 +76,14 @@ export default class AppComponent extends React.Component{
   }
 
   joinGame(){
-    var gameId = document.getElementById("join-game").value;
+    var gameId = ReactDOM.findDOMNode(this.refs.input).value
     console.log(gameId);
     var userObj = {
       uuid: this.state.uuid,
       game_id: gameId
     }
     socket.emit('join-game', userObj);
+    this.setState({ showModal: false });
   }
 
 
@@ -117,9 +119,10 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
-        {/*<button onClick={()=>this.createGame()}>Create Game</button><br/>*/}
+        {/*<button onClick={()=>this.createGame()}>Create Game</button><br/>
+        <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>*/}
         <CreateGame showModal={false} fn={this.createGame}/>
-        <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>
+        <JoinGame showModal={false} fn={this.joinGame}/>
         {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />

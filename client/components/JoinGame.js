@@ -47,7 +47,7 @@ export default class JoinGame extends React.Component{
       <div className='join-modal'>
         <Button
           bsStyle="secondary"
-          bsSize="large"
+          bsSize="small"
           onClick={this.open.bind(this)}
         >
           Join Game
@@ -60,7 +60,7 @@ export default class JoinGame extends React.Component{
             <h4>Enter a Game</h4>
             <form>
              <FormGroup bsSize="large">
-              <FormControl ref='input' placeholder="Game id" /><Button onClick={this.enter.bind(this)}>
+              <FormControl ref='input' placeholder="Game id" /><Button onClick={this.props.fn.bind(this)}>
                   Submit
               </Button>
              </FormGroup>
