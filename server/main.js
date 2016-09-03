@@ -66,7 +66,7 @@ Main.initialize = function(uuid,client){
 		
 		// we need to send a real blank init object so we don't have the problems
 		// that we are now having. 
-		 client.emit('init', Object.assign(initObj,{position: 'start' }));
+		 client.emit('init', initObj);
 	}
 	else {
 		// 1. Send init obj with blank game
