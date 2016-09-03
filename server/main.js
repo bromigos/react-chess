@@ -66,6 +66,7 @@ Main.initialize = function(uuid,client){
 		
 		// we need to send a real blank init object so we don't have the problems
 		// that we are now having. 
+		 console.log('initObj',initObj);
 		 client.emit('init', initObj);
 	}
 	else {
@@ -97,7 +98,7 @@ Main.incomingMove = function(data,client){
 	
 	console.log('Move received from client ', data.uuid);
 	
-	oppUuidToClient[data.uuid].emit('move',data.moveObj);
+	this.getOppClientFromUuid(data.uuid).emit('move',data.moveObj);
 	// client.broadcast.emit('move',data.moveObj);
 	// console.log(data.pgnString);
 	console.log(data);
