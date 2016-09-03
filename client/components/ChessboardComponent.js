@@ -60,7 +60,7 @@ export default class ChessBoardComponent extends React.Component{
     var chessGame;
     if(this.props.pgn!=='start'){
       chessGame = new Chess();
-      chessGame.load_pgn(this.props.pgn);
+      chessGame.load_pgn(this.props.pgn, { newline_char: '/'});
       start = chessGame.fen();
     }
     else

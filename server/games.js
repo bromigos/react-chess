@@ -4,11 +4,10 @@ var knex = require('knex')(config[env]);
 var Games = module.exports;
 
 Games.create = function(game) {
-  return knex.transaction(function(trx){
-    return trx
+    return knex
       .insert(game)
       .into('games')
-  })
+      .then(x=>x);
 }
 
 Games.addUser = function(user) { 
@@ -26,11 +25,12 @@ Games.update = function(move) {
 }
 
 Games.checkForOpponent = function(gameId) {
+  console.log("gameId",gameId);
   return knex
     .select()
     .from('games')
     .where({game_id: gameId})
-    .andWhere({user2_id: 0})
+    .andWhere({user2_id: "0"})
 }
 
 Games.fetchPosition = function() {
