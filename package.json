@@ -1,5 +1,5 @@
 {
-  "name": "react-pet-shop",
+  "name": "react-chess",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "nodemon ./server/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Garrett Holmes <Garrett.Holmes@gmail.com>",
+  "author": "Jimmy Stevenson <jimmyaxstevenson@gmail.com>, Garrett Holmes <Garrett.Holmes@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.9.1",
