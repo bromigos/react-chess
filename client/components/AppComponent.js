@@ -80,13 +80,14 @@ export default class AppComponent extends React.Component{
 
   joinGame(){
     var gameId = document.getElementById("join-game").value;
-    console.log(gameId);
+    //alert(gameId);
     var userObj = {
       uuid: this.state.uuid,
       game_id: gameId
     }
+    console.log('emitting join-game: ', userObj);
     socket.emit('join-game', userObj);
-    this.setState({ showModal: false });
+    //this.setState({ showModal: false });
   }
 
 
