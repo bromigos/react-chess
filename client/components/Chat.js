@@ -37,26 +37,6 @@ export default class Chat extends React.Component{
     }
   }
 
-  // pickUser(){
-  //   var user = document.getElementById("user").value;
-  //   this.setState({user: user})
-  // }
-
-  // The following should grab the rooms and fetch the messages
-  // for that room.
-  // componentDidMount(){
-  //   grabRooms()
-  //     .then((roomData) => {
-  //       this.setState({room: roomData}))
-  //     });
-    
-  //   grabMessages()
-  //     .then((messageData) =>{
-  //       this.setState({messages: messageData})
-  //     });
-  // }
-
-
   render(){
     var messages = this.state.messages.map((msg)=>
       <li><strong>{msg.user_id}</strong><span>: {msg.content}</span></li>
