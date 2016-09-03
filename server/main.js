@@ -50,7 +50,7 @@ Main.initialize = function(uuid,client){
 			if(initObj.user1_id == uuid){
 				initObj.orientation = initObj.user1_orientation;
 				oppUuidToClient[initObj.user2_id] = client;
-				oppUuidToClient[uuid] = uuidToClient[initObj.user1_id];
+				oppUuidToClient[uuid] = uuidToClient[initObj.user2_id];
 			}
 			else{
 				initObj.orientation = initObj.user2_orientation;
