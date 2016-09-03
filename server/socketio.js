@@ -63,7 +63,7 @@ io.on('connection', function(client){
   })
 
   client.on('join-game', function(newUserObj){
-    console.log('join game attempted with game ID: ', newUserObj);
+    console.log('join game attempted with game ID: ', newUserObj);  
     Games.checkForOpponent(newUserObj.game_id)
       .then(x=>{
         console.log("socketio_line69: ",x);
