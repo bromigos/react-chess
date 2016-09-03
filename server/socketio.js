@@ -16,7 +16,7 @@ io.on('connection', function(client){
   Chats.fetchMessages()
     .then(function(msg){
       for(var i = 0; i < msg.length; i++){
-        io.emit('receive-message', msg[i]);
+        client.emit('receive-message', msg[i]);
       }
     })
 	console.log('we have a connection!');
@@ -44,8 +44,8 @@ io.on('connection', function(client){
     Chats.insert(message);
     // UUID of original sender of message to server needed on next line!
 
+    client.emit('receive-message', msg);
     Main.getOppClientFromUuid(msg.uuid).emit('receive-message',msg);
-    //io.emit('receive-message', msg);
   })
 
   client.on('new-game', function(msg){
@@ -80,7 +80,7 @@ io.on('connection', function(client){
       .then(x=>{
         var moveData = {
           game_id: x[0].game_id,
-          position: data.pgnString
+          position: data.pgnString // change to fenString
         }
         return Games.update(moveData);
       })

@@ -108,7 +108,6 @@ export default class AppComponent extends React.Component{
           <div>
          {/* <NavComponent /> */}
            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} />
-           <Chat username={this.state.username} socket={socket} uuid={this.state.uuid}/>
         </div>);
       }
       else {
