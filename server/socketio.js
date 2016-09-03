@@ -80,7 +80,7 @@ io.on('connection', function(client){
       .then(x=>{
         var moveData = {
           game_id: x[0].game_id,
-          position: data.pgnString // change to fenString
+          position: data.fenString 
         }
         return Games.update(moveData);
       })
