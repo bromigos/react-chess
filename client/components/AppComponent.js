@@ -15,7 +15,8 @@ export default class AppComponent extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      username: prompt('Please enter a username!'),
+      username: 'anonymous',
+      // username: 'prompt('Please enter a username!''),
       loading: true,
       yourGame: undefined
     }
