@@ -38,53 +38,42 @@ Main.initialize = function(uuid,client){
 	Games.getGameByUUID(uuid).then(gameRow => {
 		console.log("gameRow",gameRow);
 		if(gameRow.length>0){ //check if they in-game
-		// 1. emit init obj
-	//if(false){
+			// 1. emit init obj
+			//if(false){
+			var initObj = Object.assign(gameRow[0],{uuid: uuid});
+			//TO DO:
+			// ==> {username}
 
-		var initObj = Object.assign(gameRow[0],{uuid: uuid});
+			//initObj.username = 'Jacoby';
+			var oppUUID = initObj.user1_id == uuid ? initObj.user2_id : initObj.user1_id;
 
-		//TO DO:
-		// ==> {username}
+			if(initObj.user1_id == uuid){
+				initObj.orientation = initObj.user1_orientation;
+				oppUuidToClient[initObj.user2_id] = client;
+				oppUuidToClient[uuid] = uuidToClient[initObj.user1_id];
+			}
+			else{
+				initObj.orientation = initObj.user2_orientation;
+				oppUuidToClient[initObj.user1_id] = client;
+				oppUuidToClient[uuid] = uuidToClient[initObj.user1_id];
+			}
 
-		//initObj.username = 'Jacoby';
-		var oppUUID = initObj.user1_id == uuid ? initObj.user2_id : initObj.user1_id;
-
-		if(initObj.user1_id == uuid){
-			initObj.orientation = initObj.user1_orientation;
-			 oppUuidToClient[initObj.user2_id] = client;
-			 oppUuidToClient[uuid] = uuidToClient[initObj.user1_id];
+			//console.log(uuidToClient[uuid]===client);
+			//console.log(oppUuidToClient[oppUUID]);
+			
+			
+			// we need to send a real blank init object so we don't have the problems
+			// that we are now having. 
+			console.log('initObj',initObj);
+			client.emit('init', initObj);
+		}	else {
+			// 1. Send init obj with blank game
+			console.log('getGameByUUID failed...');
+			client.emit('init', {showSetup: true, uuid: uuid});
 		}
-		else{
-			initObj.orientation = initObj.user2_orientation;
-			 oppUuidToClient[initObj.user1_id] = client;
-			 oppUuidToClient[uuid] = uuidToClient[initObj.user1_id];
-		}
-
-		//console.log(uuidToClient[uuid]===client);
-		//console.log(oppUuidToClient[oppUUID]);
-		
-		
-		// we need to send a real blank init object so we don't have the problems
-		// that we are now having. 
-		 console.log('initObj',initObj);
-		 client.emit('init', initObj);
-	}
-	else {
-		// 1. Send init obj with blank game
-		console.log('getGameByUUID failed...');
-		client.emit('init', {showSetup: true, uuid: uuid});
-	}
-
 	}); // end of .then()
-	
-	
-
-	
-
-
 	// 		Active? Join game
 	//		Not? 	show game setup
-
 	// join game => pull down chats/board, check orientation / notify user? 
 };
 
@@ -92,10 +81,8 @@ Main.initialize = function(uuid,client){
 Main.incomingMove = function(data,client){
 	// 1. Validate move?
 	// 2. Send move to DB
-	// 2. Send move to opponent based on client hashmap
-
-	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}
-	
+	// 3. Send move to opponent based on client hashmap
+	// Data: { uuid: uuid, moveObj: moveObj, pgnString: pgnString}	
 	console.log('Move received from client ', data.uuid);
 	
 	this.getOppClientFromUuid(data.uuid).emit('move',data.moveObj);
@@ -107,9 +94,9 @@ Main.incomingMove = function(data,client){
 Main.incomingChat = function(data){
 	// 1. Emit to correct client -- need UUID of message sender to use client hashmap
 	// 2. append to db
-	 console.log('msg:', msg);
-    // Chats.insert(msg)
-    io.emit('receive-message', msg);
+	console.log('msg:', msg);
+  // Chats.insert(msg)
+  io.emit('receive-message', msg);
 };
 
 app.get('/', function(req,res) {
@@ -120,33 +107,11 @@ app.use(express.static(path.join(__dirname, "../client/public")));
 
 app.use(bodyParser.json());
 
-
-
 app.get('/app-bundle.js',
- browserify('./client/main.js', {
+  browserify('./client/main.js', {
     transform: [ [ require('babelify'), { presets: ["es2015", "react"] } ] ]
   })
 );
-
-//endpoints for testing only
-
-// app.get('/game_1785', function(req,res) {
-// 	// 
-// });
-
-
-// app.get('/game_*', function(req,res) { // responds to /game_:gameid
-// 	var gameId = req.url.substring(req.url.lastIndexOf('/game_')+6);
-// 	console.log(gameId);
-// 	res.end(gameId);
-// });
-
-
-
-
-
-
-
 
 var port = process.env.PORT || 4000;
 server.listen(port);

@@ -4,10 +4,10 @@ var knex = require('knex')(config[env]);
 var Games = module.exports;
 
 Games.create = function(game) {
-    return knex
-      .insert(game)
-      .into('games')
-      .then(x=>x);
+  return knex
+    .insert(game)
+    .into('games')
+    .then(x=>x);
 }
 
 Games.addUser = function(user) { 
