@@ -15,7 +15,7 @@ var clients = {
 io.on('connection', function(client){
   Chats.fetchMessages()
     .then(function(msg){
-      for(var i = 0; i < msg.length; i++){
+      for(var i = msg.length -1; i >= 0; i--){
         client.emit('receive-message', msg[i]);
       }
     })
