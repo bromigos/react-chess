@@ -78,8 +78,12 @@ export default class AppComponent extends React.Component{
     }
     socket.emit('new-game', createObj);
     this.state.yourGame = game_id;
-    console.log(this.state.yourGame);
     this.setState({gameCreated: false, showModal: false});
+    console.log(this.state.yourGame);
+  }
+
+  getGameID(){
+    return this.state.game_id;
   }
 
   joinGame(){
@@ -102,7 +106,7 @@ export default class AppComponent extends React.Component{
           <div>
            <br />
            <ButtonToolbar>
-            <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} gameId={this.state.yourGame} />
+            <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} position={this.state.position} yourGame={this.state.yourGame} />
             <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
            </ButtonToolbar>
            <br />
@@ -116,6 +120,7 @@ export default class AppComponent extends React.Component{
         return (
           <div>
          {/* <NavComponent /> */}
+            <div className="your-game"> Your game code is: { this.getGameID() }</div>
            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} />
         </div>);
       }
@@ -140,7 +145,6 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
-        {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}
