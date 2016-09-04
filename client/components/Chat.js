@@ -44,11 +44,13 @@ export default class Chat extends React.Component{
     )
     return (
       <div>
-        <input id="message" type="text"/> <button className="sendButton"  onClick={()=>this.submitMessage()}>Send</button><br/>
         <div className='chat-container'>
-          <ul>
-            {messages}
-          </ul>
+          <input id="message" type="text"/> <button className="sendButton"  onClick={()=>this.submitMessage()}>Send</button><br/>
+          <div className="scrolly">
+            <ul>
+              {messages}
+            </ul>
+          </div>
         </div>
       </div>
     );
