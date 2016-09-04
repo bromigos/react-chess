@@ -16,6 +16,7 @@ export default class JoinGame extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      uuid: this.props.uuid,
       showModal: this.props.showModal
     };
   }

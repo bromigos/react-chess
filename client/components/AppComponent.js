@@ -9,6 +9,7 @@ import CreateGame from './CreateGame';
 import JoinGame from './JoinGame';
 
 var socket = require('socket.io-client')(document.location.href);
+var ButtonToolbar = require('react-bootstrap/lib/ButtonToolbar')
 
 export default class AppComponent extends React.Component{
 
@@ -82,7 +83,8 @@ export default class AppComponent extends React.Component{
   }
 
   joinGame(){
-    var gameId = document.getElementById("join-game").value;
+    //var gameId = document.getElementById("join-game").value;
+    var gameId = ReactDOM.findDOMNode(this.refs.input).value;
     //alert(gameId);
     var userObj = {
       uuid: this.state.uuid,
@@ -90,8 +92,12 @@ export default class AppComponent extends React.Component{
     }
     console.log('emitting join-game: ', userObj);
     socket.emit('join-game', userObj);
+<<<<<<< fa16b125bd1c21da4862505c98912caa8035f2c0
     this.setState({yourGame: gameId});
     //this.setState({ showModal: false });
+=======
+    this.setState({ showModal: false });
+>>>>>>> resolve conflicts
   }
 
 
@@ -99,6 +105,16 @@ export default class AppComponent extends React.Component{
       if(!this.state.loading && this.state.showSetup){
         return (
           <div>
+<<<<<<< fa16b125bd1c21da4862505c98912caa8035f2c0
+=======
+           <br />
+           <ButtonToolbar>
+            <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} gameId={this.state.yourGame} />
+            <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
+           </ButtonToolbar>
+           <br />
+          <p>Show setup</p>
+>>>>>>> resolve conflicts
           {/* <GameSetupComponent uuid={this.state.uuid} /> */}
         </div>
         );
@@ -132,8 +148,11 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
+<<<<<<< fa16b125bd1c21da4862505c98912caa8035f2c0
         {/*<CreateGame showModal={false} fn={this.createGame}/>
         <JoinGame showModal={false} fn={this.joinGame}/>*/}
+=======
+>>>>>>> resolve conflicts
         {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
