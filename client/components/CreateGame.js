@@ -16,15 +16,9 @@ export default class CreateGame extends React.Component{
       showModal: this.props.showModal,
       socket: this.props.socket,
       orientation: this.props.orientation,
-<<<<<<< HEAD
       postition: this.props.postition,
       uuid: this.props.uuid,
       yourGame: this.props.yourGame
-=======
-      uuid: this.props.uuid,
-      gameId: this.props.gameId,
-      game_id: this.props.gameId
->>>>>>> 061138973ebaa4560fdb5e32692c97f25733e71f
     };
   }
 
