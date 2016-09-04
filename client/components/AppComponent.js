@@ -38,7 +38,7 @@ export default class AppComponent extends React.Component{
       console.log('initObj: ',initObj);
      
       // make sure render() access state
-      this.setState(Object.assign(initObj,{ loading: false, pgn: initObj.position }));
+      this.setState(Object.assign(initObj,{ loading: false, pgn: initObj.position, fen: initObj.position }));
    });  
     this.state.loading = true;
     var myUUID;
@@ -107,7 +107,7 @@ export default class AppComponent extends React.Component{
         return (
           <div>
          {/* <NavComponent /> */}
-           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} />
+           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} />
         </div>);
       }
       else {

@@ -54,19 +54,9 @@ export default class ChessBoardComponent extends React.Component{
      // });
     socket.on('move', data=> this.incomingMove(data.moveObj, data.fenString) ); // incomingMoveHandler
     
-    console.log(this.props.pgn);
+    console.log(this.props.fen);
 
-    var start;
-    var chessGame;
-    if(this.props.pgn!=='start'){
-      chessGame = new Chess();
-      chessGame.load_pgn(this.props.pgn, { newline_char: '/'});
-      start = chessGame.fen();
-    }
-    else
-      start = 'start';
-   
-   var startingPosition = start;
+   var startingPosition = this.props.fen;
     var cfg = {
       draggable: true,
       dropOffBoard: 'snapback', // this is the default

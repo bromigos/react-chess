@@ -59,7 +59,10 @@ io.on('connection', function(client){
       position: 'start',
       inProgress: true
     }
-    Games.create(newGameObj);
+    Games.create(newGameObj).then(x=>{
+      if(x[0]==1)
+        Main.initialize(msg.uuid,client)
+    });
   })
 
   client.on('join-game', function(newUserObj){
