@@ -15,8 +15,9 @@ export default class AppComponent extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      username: 'anonymous',
-      // username: 'prompt('Please enter a username!''),
+      username: document.location.search.indexOf('name=') > -1 ? 
+          document.location.search.substring(document.location.search.indexOf('name=')+5) :
+          prompt("Please input a username..."),
       loading: true,
       yourGame: undefined
     }
