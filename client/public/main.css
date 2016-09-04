@@ -16,16 +16,15 @@ body {
 .chat-container {
   border-color: black;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   float: right;
-  background:#b6e1f6;
   height:570px;
   width:625px;
 }
 
 .scrolly {
   float: right;
-  background:#b6e1f6;
+  opacity: 5;
   height:530px;
   width:600px;
   overflow-y: scroll;
@@ -33,7 +32,7 @@ body {
 
 .messages{
   margin: 10px;
-  background:#ffffcc;
+  background:#fff;
   border-radius: 10px;
 }
 
