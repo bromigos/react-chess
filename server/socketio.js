@@ -68,7 +68,10 @@ io.on('connection', function(client){
       .then(x=>{
         console.log("socketio_line69: ",x);
         if(x.length > 0){
-          Games.addUser(newUserObj).then(x=>console.log('added user',newUserObj));
+          Games.addUser(newUserObj).then(x=>{
+            console.log('added user',newUserObj);
+            Main.initialize(newUserObj.uuid, client);
+          });
         } else {
           io.emit('game-status', 'The chosen game is full.')
         }
