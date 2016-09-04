@@ -89,6 +89,7 @@ export default class AppComponent extends React.Component{
     }
     console.log('emitting join-game: ', userObj);
     socket.emit('join-game', userObj);
+    this.setState({yourGame: gameId});
     //this.setState({ showModal: false });
   }
 
@@ -97,7 +98,6 @@ export default class AppComponent extends React.Component{
       if(!this.state.loading && this.state.showSetup){
         return (
           <div>
-          <p>Show setup</p>
           {/* <GameSetupComponent uuid={this.state.uuid} /> */}
         </div>
         );
@@ -118,14 +118,19 @@ export default class AppComponent extends React.Component{
   renderGameCode(){
     if(this.state.yourGame !== undefined){
       return <div className="your-game"> Your game code is: {this.state.yourGame}</div>
+    } else {
+      return (
+        <div>
+          <button onClick={()=>this.createGame()}>Create Game</button><br/>
+          <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>
+        </div>
+      )
     }
   }
 
   render(){
     return (
       <div id="container">
-        <button onClick={()=>this.createGame()}>Create Game</button><br/>
-        <input id="join-game" type="text" placeholder="enter game code here"/> <button className="joinButton"  onClick={()=>this.joinGame()}>Join Game</button><br/>
         {/*<CreateGame showModal={false} fn={this.createGame}/>
         <JoinGame showModal={false} fn={this.joinGame}/>*/}
         {this.renderGameCode()}

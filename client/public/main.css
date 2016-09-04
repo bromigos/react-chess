@@ -1,7 +1,7 @@
 .chessboard {
   float: left;
   width: 600px;
-  padding-left: 20px;
+  padding-left: 10px;
   padding-right: 30px;
 }
 
@@ -9,28 +9,41 @@
   size: 20px;
 }
 
+body {
+  background-image: url("http://www.powellschicago.com/wp-content/uploads/2015/07/Chess2.jpg");
+}
+
 .chat-container {
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
   float: right;
-  background:#ddd;
-  height:590px;
+  background:#b6e1f6;
+  height:570px;
   width:625px;
 }
 
 .scrolly {
   float: right;
-  background:#ddd;
-  height:590px;
-  width:625px;
+  background:#b6e1f6;
+  height:530px;
+  width:600px;
   overflow-y: scroll;
+}
+
+.messages{
+  margin: 10px;
+  background:#ffffcc;
+  border-radius: 10px;
 }
 
 #message {
   float:right;
-  background:#ddd;
-  width: 500px;
+  background:#eee;
+  width: 560px;
 }
 
 .sendButton {
-  background-color: #fdd;
+  background-color: #fca;
   float:right;
 }
