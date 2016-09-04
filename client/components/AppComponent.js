@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+<<<<<<< HEAD
+=======
+import React from 'react';
+import ReactDOM from 'react-dom';
+>>>>>>> 061138973ebaa4560fdb5e32692c97f25733e71f
 // Import React component from Chat
 import Chat from './Chat';
 import ChessboardComponent from './ChessboardComponent';
@@ -96,7 +101,11 @@ export default class AppComponent extends React.Component{
     }
     console.log('emitting join-game: ', userObj);
     socket.emit('join-game', userObj);
+<<<<<<< HEAD
     this.setState({yourGame: gameId, showModal: false});
+=======
+    this.setState({ showModal: false });
+>>>>>>> 061138973ebaa4560fdb5e32692c97f25733e71f
   }
 
 
@@ -106,7 +115,11 @@ export default class AppComponent extends React.Component{
           <div>
            <br />
            <ButtonToolbar>
+<<<<<<< HEAD
             <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} position={this.state.position} yourGame={this.state.yourGame} />
+=======
+            <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} pgn={this.state.position} gameId={this.state.yourGame} />
+>>>>>>> 061138973ebaa4560fdb5e32692c97f25733e71f
             <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
            </ButtonToolbar>
            <br />
@@ -145,6 +158,10 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
+<<<<<<< HEAD
+=======
+        {this.renderGameCode()}
+>>>>>>> 061138973ebaa4560fdb5e32692c97f25733e71f
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}
