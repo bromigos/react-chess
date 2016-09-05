@@ -41,3 +41,12 @@ Games.getGameByUUID = function(uuid){
 		.orWhere({user2_id: uuid})
    .andWhere({inProgress: true});
  }
+
+ Games.gameOver = function(gameId){
+  console.log('gameId in Games_line46 : ', gameId);
+  return knex('games')
+    .where({game_id: gameId})
+    .update({inProgress: false})
+    .then(x=>x);
+
+ }

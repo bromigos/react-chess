@@ -65,7 +65,7 @@ Main.initialize = function(uuid,client){
 			// we need to send a real blank init object so we don't have the problems
 			// that we are now having. 
 			console.log('initObj',initObj);
-			client.emit('init', Object.assign(initObj,{showSetup:false}));
+			client.emit('init', Object.assign(initObj,{showSetup:false, game_id: gameRow[0].game_id}));
 		}	else {
 			// 1. Send init obj with blank game
 			console.log('getGameByUUID failed...');
@@ -88,7 +88,21 @@ Main.incomingMove = function(data,client){
 	this.getOppClientFromUuid(data.uuid).emit('move',data.moveObj);
 	// client.broadcast.emit('move',data.moveObj);
 	// console.log(data.pgnString);
-	console.log(data);
+	console.log('data: ', data);
+
+	// chess.load takes --> data.fenString
+	// chess.load(data.fenString);
+	// console.log(chess.game_over());
+	
+	// if (chess.game_over()) {
+	// 		means there is a stalemate or checkmate
+	// 		emit message to AppComponent
+	// 		AppComponent displays a modal with 2 options: rematch/exit
+	// } else {
+	// 		do nothing;
+	// }
+
+
 };
 
 Main.incomingChat = function(data){

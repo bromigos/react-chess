@@ -99,6 +99,12 @@ io.on('connection', function(client){
     // console.log(data.pgnString);
   	
   });
-  	
+  client.on('gameover', function(gameId){
+    console.log('gameId in socketio_line101: ', gameId);
+    Games.gameOver(gameId);
+    // client.emit('Game-Over')
+    
+  })
+
   client.on('connect', data=>console.log(data));
 });
