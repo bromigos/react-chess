@@ -9,6 +9,7 @@ export default class ChessBoardComponent extends React.Component{
 
   constructor(props){
     super(props);
+    this.state = {yourGame: this.props.yourGame};
     socket = this.props.socket;
   }
 
@@ -38,19 +39,21 @@ export default class ChessBoardComponent extends React.Component{
   }
 
   incomingMove(moveObj, fenString){
-    // game over check
-    if (this.state.chess.game_over()) {
-      console.log('game is over');
-      socket.emit('gameover');
-    }
 
     console.log('incoming move: ',JSON.stringify(moveObj));
     if(fenString !== this.state.chess.fen()){ // 
       this.state.chess.move(moveObj);
       this.state.chessBoard.position(this.state.chess.fen());
     }
-    else
+    else {
       console.log('err -- duplicate position received'); //defensive programming :)
+    }
+
+    // game over check
+    if (this.state.chess.game_over()) {
+      console.log('game is over: ', this.props.yourGame);
+      socket.emit('gameover', this.props.yourGame);
+    }
   }
 
 

@@ -35,7 +35,7 @@ export default class AppComponent extends React.Component{
 
     socket.on('init', initObj=> { 
       /// having some sort of async issue with initObj being blank
-
+      this.state.yourGame = initObj.game_id;
       console.log('initObj: ',initObj);
      
       // make sure render() access state
@@ -105,7 +105,7 @@ export default class AppComponent extends React.Component{
           <div>
            <br />
            <ButtonToolbar>
-            <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} position={this.state.position} yourGame={this.state.yourGame} />
+            <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} position={this.state.position} yourGame={this.state.game_id} />
             <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
            </ButtonToolbar>
            <br />
@@ -120,7 +120,7 @@ export default class AppComponent extends React.Component{
           <div>
          {/* <NavComponent /> */}
             <div className="your-game"> Your game code is: { this.getGameID() }</div>
-           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} />
+           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} yourGame={this.state.yourGame} />
         </div>);
       }
       else {

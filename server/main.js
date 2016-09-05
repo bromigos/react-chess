@@ -65,7 +65,7 @@ Main.initialize = function(uuid,client){
 			// we need to send a real blank init object so we don't have the problems
 			// that we are now having. 
 			console.log('initObj',initObj);
-			client.emit('init', Object.assign(initObj,{showSetup:false}));
+			client.emit('init', Object.assign(initObj,{showSetup:false, game_id: gameRow[0].game_id}));
 		}	else {
 			// 1. Send init obj with blank game
 			console.log('getGameByUUID failed...');

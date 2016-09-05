@@ -43,8 +43,10 @@ Games.getGameByUUID = function(uuid){
  }
 
  Games.gameOver = function(gameId){
+  console.log('gameId in Games_line46 : ', gameId);
   return knex('games')
-    .where({game_id: game_Id})
-    .update({inProgress: false});
+    .where({game_id: gameId})
+    .update({inProgress: false})
+    .then(x=>x);
 
  }
