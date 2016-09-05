@@ -99,6 +99,8 @@ io.on('connection', function(client){
     // console.log(data.pgnString);
   	
   });
-  	
+  client.on('gamover', function(){
+    Games.game_over();
+  })
   client.on('connect', data=>console.log(data));
 });

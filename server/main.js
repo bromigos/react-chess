@@ -88,7 +88,21 @@ Main.incomingMove = function(data,client){
 	this.getOppClientFromUuid(data.uuid).emit('move',data.moveObj);
 	// client.broadcast.emit('move',data.moveObj);
 	// console.log(data.pgnString);
-	console.log(data);
+	console.log('data: ', data);
+
+	// chess.load takes --> data.fenString
+	// chess.load(data.fenString);
+	// console.log(chess.game_over());
+	
+	// if (chess.game_over()) {
+	// 		means there is a stalemate or checkmate
+	// 		emit message to AppComponent
+	// 		AppComponent displays a modal with 2 options: rematch/exit
+	// } else {
+	// 		do nothing;
+	// }
+
+
 };
 
 Main.incomingChat = function(data){
