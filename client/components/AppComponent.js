@@ -70,7 +70,7 @@ export default class AppComponent extends React.Component{
     })
   }
   createGame(){
-    var game_id = Math.floor(Math.random()*1000000000);
+    var game_id = ("000000000" + Math.floor(Math.random()*1000000000)).slice(-9);
     var createObj = {
       game_id: game_id,
       uuid: this.state.uuid
