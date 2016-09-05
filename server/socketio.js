@@ -45,7 +45,9 @@ io.on('connection', function(client){
     // UUID of original sender of message to server needed on next line!
 
     client.emit('receive-message', msg);
-    Main.getOppClientFromUuid(msg.uuid).emit('receive-message',msg);
+    var oppClient = Main.getOppClientFromUuid(msg.uuid);
+    if(oppClient && oppClient !==null)
+      oppClient.emit('receive-message',msg);
   })
 
   client.on('new-game', function(msg){
