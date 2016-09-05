@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// Import React component from Chat
 import Chat from './Chat';
 import ChessboardComponent from './ChessboardComponent';
 import NavComponent from './NavComponent';
@@ -9,6 +8,7 @@ import CreateGame from './CreateGame';
 import JoinGame from './JoinGame';
 
 var socket = require('socket.io-client')(document.location.href);
+var ButtonToolbar = require('react-bootstrap/lib/ButtonToolbar')
 
 export default class AppComponent extends React.Component{
 
@@ -77,12 +77,17 @@ export default class AppComponent extends React.Component{
     }
     socket.emit('new-game', createObj);
     this.state.yourGame = game_id;
-    console.log(this.state.yourGame);
     this.setState({gameCreated: false, showModal: false});
+    console.log(this.state.yourGame);
+  }
+
+  getGameID(){
+    return this.state.game_id;
   }
 
   joinGame(){
-    var gameId = document.getElementById("join-game").value;
+    //var gameId = document.getElementById("join-game").value;
+    var gameId = ReactDOM.findDOMNode(this.refs.input).value;
     //alert(gameId);
     var userObj = {
       uuid: this.state.uuid,
@@ -90,8 +95,7 @@ export default class AppComponent extends React.Component{
     }
     console.log('emitting join-game: ', userObj);
     socket.emit('join-game', userObj);
-    this.setState({yourGame: gameId});
-    //this.setState({ showModal: false });
+    this.setState({yourGame: gameId, showModal: false});
   }
 
 
@@ -99,6 +103,13 @@ export default class AppComponent extends React.Component{
       if(!this.state.loading && this.state.showSetup){
         return (
           <div>
+           <br />
+           <ButtonToolbar>
+            <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} position={this.state.position} yourGame={this.state.yourGame} />
+            <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
+           </ButtonToolbar>
+           <br />
+          <p>Show setup</p>
           {/* <GameSetupComponent uuid={this.state.uuid} /> */}
         </div>
         );
@@ -108,6 +119,7 @@ export default class AppComponent extends React.Component{
         return (
           <div>
          {/* <NavComponent /> */}
+            <div className="your-game"> Your game code is: { this.getGameID() }</div>
            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} />
         </div>);
       }
@@ -132,9 +144,6 @@ export default class AppComponent extends React.Component{
   render(){
     return (
       <div id="container">
-        {/*<CreateGame showModal={false} fn={this.createGame}/>
-        <JoinGame showModal={false} fn={this.joinGame}/>*/}
-        {this.renderGameCode()}
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}

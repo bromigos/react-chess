@@ -13,7 +13,12 @@ export default class CreateGame extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      showModal: this.props.showModal
+      showModal: this.props.showModal,
+      socket: this.props.socket,
+      orientation: this.props.orientation,
+      postition: this.props.postition,
+      uuid: this.props.uuid,
+      yourGame: this.props.yourGame
     };
   }
 
