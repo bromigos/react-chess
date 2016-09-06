@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Chat from './Chat';
+import LobbyChat from './LobbyChat';
 import ChessboardComponent from './ChessboardComponent';
 import NavComponent from './NavComponent';
 import BackgroundComponent from './BackgroundComponent';
@@ -67,8 +68,9 @@ export default class AppComponent extends React.Component{
 
   resetGame(gameId){
    // socket.emit('uuid',this.state.uuid);
+    socket.emit('exit-game');
     socket.emit('gameover', gameId);
-    this.setState({showResetGameBtn: false, showSetup:true});
+    this.setState({showResetGameBtn: false, showSetup:true, yourGame: undefined});
     console.log('resetGame');
     //socket.emit('uuid',this.state.uuid);
   }
@@ -111,13 +113,6 @@ export default class AppComponent extends React.Component{
     this.setState({yourGame: gameId, showModal: false});
   }
 
-  resetBtn(){
-    if(this.state.showResetGameBtn)
-      return ( <button onClick={this.resetGame.bind(this)}>New game</button> );
-
-  }
-
-
   waitUntilDoneLoading(){
       if(!this.state.loading && this.state.showSetup){
         return (
@@ -128,7 +123,7 @@ export default class AppComponent extends React.Component{
             <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
             
            </ButtonToolbar>
-           <br />
+           <br />     
         </div>
         );
       }
@@ -139,7 +134,8 @@ export default class AppComponent extends React.Component{
          {/* <NavComponent /> */}
             <ResetGame resetGame={this.resetGame.bind(this,this.state.yourGame)} />
             <div className="your-game"> Your game code is: { this.getGameID() }</div>
-           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} showResetGameBtn={this.showResetGameBtn.bind(this)} yourGame={this.getGameID()} />
+            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} showResetGameBtn={this.showResetGameBtn.bind(this)} yourGame={this.getGameID()} />
+            <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} yourGame={this.state.yourGame} />
         </div>);
       }
       else {
@@ -159,15 +155,21 @@ export default class AppComponent extends React.Component{
       )
     }
   }
+  renderLobbyChat(){
+    if(this.state.yourGame === undefined){
+      return (
+        <div><LobbyChat username={this.state.username} socket={socket} uuid={this.state.uuid} yourGame={this.state.yourGame} /></div>
+      )
+    }
+  }
 
   render(){
     return (
       <div id="container">
         {this.waitUntilDoneLoading()}
-        {this.resetBtn()}
+        {this.renderLobbyChat()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}
-        <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} yourGame={this.state.yourGame} />
       </div>
     );
   }

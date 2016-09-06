@@ -33,9 +33,28 @@ io.on('connection', function(client){
     Main.initialize(uuid,client);
 
   });
+  client.on('lobby-message', function(msg){
+    console.log('msg to lobby:', msg);
+    var message = {
+      content: msg.content,
+      user_id: msg.user_id,
+      game_id: 'lobby'
+    }
+    Chats.insert(message);
+    io.emit('receive-message', msg);
+  })
+
+  client.on('exit-game', function(){
+    Chats.fetchMessages()
+    .then(function(msg){
+      for(var i = msg.length -1; i >= 0; i--){
+        client.emit('receive-message', msg[i]);
+      }
+    })
+  })
   
   client.on('new-message', function(msg){
-    console.log('msg:', msg);
+    console.log('msg to opponent:', msg);
     var message = {
       content: msg.content,
       user_id: msg.user_id,

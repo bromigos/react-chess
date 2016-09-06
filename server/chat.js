@@ -18,4 +18,5 @@ Chats.fetchMessages = function(){
     .where({game_id: 'lobby'})
     .orderBy('message_id', 'desc')
     .limit(25)
+    .then(x=>x)
 }
