@@ -65,12 +65,9 @@ export default class AppComponent extends React.Component{
   }
 
   resetGame(){
-<<<<<<< HEAD
    // socket.emit('uuid',this.state.uuid);
     this.setState({showResetGameBtn: false, showSetup:true})
-=======
     socket.emit('uuid',this.state.uuid);
->>>>>>> 490bf01cff33fdd2a85f6462e86aedbd33005921
   }
 
   showResetGameBtn(){
@@ -113,11 +110,8 @@ export default class AppComponent extends React.Component{
 
   resetBtn(){
     if(this.state.showResetGameBtn)
-<<<<<<< HEAD
       return ( <button onClick={this.resetGame.bind(this)}>New game</button> );
-=======
-      return ( <button onClick={this.resetGame}>New game</button> );
->>>>>>> 490bf01cff33fdd2a85f6462e86aedbd33005921
+
   }
 
 
