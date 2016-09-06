@@ -21,13 +21,6 @@ body {
   background-image: url("http://www.powellschicago.com/wp-content/uploads/2015/07/Chess2.jpg");
 }
 
-/*.chat-container {
-  opacity: 100;
-  float: right;
-  height: 570;
-  width: 625px;
-  padding-right: 10px;
-}*/
 
 .chat-container {
   opacity: 100;
@@ -83,11 +76,9 @@ body {
 .white-1e1d7 {
   background-color: rgba(214, 214, 214, 0.96);
   color: #CFBB9C;
-
 }
 
 .black-3c85d {
   background-color: #3a4f61;
   color: #CFBB9C;
-
 }
