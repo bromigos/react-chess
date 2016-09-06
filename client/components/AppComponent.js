@@ -65,10 +65,12 @@ export default class AppComponent extends React.Component{
     });
   }
 
-  resetGame(){
+  resetGame(gameId){
    // socket.emit('uuid',this.state.uuid);
-    this.setState({showResetGameBtn: false, showSetup:true})
-    socket.emit('uuid',this.state.uuid);
+    socket.emit('gameover', gameId);
+    this.setState({showResetGameBtn: false, showSetup:true});
+    console.log('resetGame');
+    //socket.emit('uuid',this.state.uuid);
   }
 
   showResetGameBtn(){
@@ -135,7 +137,7 @@ export default class AppComponent extends React.Component{
         return (
           <div>
          {/* <NavComponent /> */}
-            <ResetGame />
+            <ResetGame resetGame={this.resetGame.bind(this,this.state.yourGame)} />
             <div className="your-game"> Your game code is: { this.getGameID() }</div>
            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} showResetGameBtn={this.showResetGameBtn.bind(this)} yourGame={this.getGameID()} />
         </div>);
