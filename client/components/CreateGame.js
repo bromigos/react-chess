@@ -60,9 +60,9 @@ export default class CreateGame extends React.Component{
           <Modal.Body>
             <h4>Select a time option</h4>
             <Radio onClick={ this.props.fn.bind(this) }> Untimed </Radio>
-            <Radio onClick={ this.enter.bind(this, 15) }> 15 mins </Radio>
-            <Radio onClick={ this.enter.bind(this, 30) }> 30 mins </Radio>
-            <Radio onClick={ this.enter.bind(this, 60) }> 60 mins </Radio>
+            <Radio onClick={ this.enter.bind(this, 15) } disabled> 15 mins </Radio>
+            <Radio onClick={ this.enter.bind(this, 30) } disabled> 30 mins </Radio>
+            <Radio onClick={ this.enter.bind(this, 60) } disabled> 60 mins </Radio>
             <p>Select a <OverlayTrigger overlay={tooltip}><a href="#">time</a></OverlayTrigger> setting</p>
           </Modal.Body>
           <Modal.Footer>
