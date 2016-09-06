@@ -39,7 +39,7 @@ Games.getGameByUUID = function(uuid){
 		.from('games')
 		.where({user1_id: uuid})
 		.orWhere({user2_id: uuid})
-   .andWhere({inProgress: true});
+   .andWhere({inProgress: 1});
  }
 
  Games.gameOver = function(gameId){
