@@ -6,6 +6,7 @@ import NavComponent from './NavComponent';
 import BackgroundComponent from './BackgroundComponent';
 import CreateGame from './CreateGame';
 import JoinGame from './JoinGame';
+import ResetGame from './ResetGame';
 
 var socket = require('socket.io-client')(document.location.href);
 var ButtonToolbar = require('react-bootstrap/lib/ButtonToolbar')
@@ -134,6 +135,7 @@ export default class AppComponent extends React.Component{
         return (
           <div>
          {/* <NavComponent /> */}
+            <ResetGame />
             <div className="your-game"> Your game code is: { this.getGameID() }</div>
            <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} showResetGameBtn={this.showResetGameBtn.bind(this)} yourGame={this.getGameID()} />
         </div>);
