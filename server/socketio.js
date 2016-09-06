@@ -33,9 +33,19 @@ io.on('connection', function(client){
     Main.initialize(uuid,client);
 
   });
+  client.on('lobby-message', function(msg){
+    console.log('msg to lobby:', msg);
+    var message = {
+      content: msg.content,
+      user_id: msg.user_id,
+      game_id: 'lobby'
+    }
+    Chats.insert(message);
+    io.emit('receive-message', msg);
+  })
   
   client.on('new-message', function(msg){
-    console.log('msg:', msg);
+    console.log('msg to opponent:', msg);
     var message = {
       content: msg.content,
       user_id: msg.user_id,

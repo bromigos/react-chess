@@ -13,7 +13,6 @@ export default class Chat extends React.Component{
     };
   }
   componentDidMount(){
-    this.state.game_id = this.props.yourGame;
     this.state.socket.on('receive-message', (msg)=>{ // es6 style, implicitly binds parameter "this"
       var messages = this.state.messages;
       messages.unshift(msg);
@@ -28,10 +27,10 @@ export default class Chat extends React.Component{
     var message = {
       content: body,
       user_id: this.state.user || "anonymous",
-      game_id: this.state.game_id,
+      game_id: this.state.game_id || "lobby",
       uuid: this.props.uuid
     }
-    this.state.socket.emit('new-message', message);
+    this.state.socket.emit('lobby-message', message);
     // if(this.state.game_id === "lobby"){
     //   this.state.socket.to('lobby').emit('new-message', message);
     // } else {
@@ -44,7 +43,7 @@ export default class Chat extends React.Component{
       <li><strong>{msg.user_id}</strong><span>: {msg.content}</span></li>
     )
     return (
-      <div>
+      <div className='lobby-chat'>
         <div className='chat-container'>
           <input id="message" type="text"/> <button className="sendButton"  onClick={()=>this.submitMessage()}>Send</button><br/>
           <div className="scrolly">
