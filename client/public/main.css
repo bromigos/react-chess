@@ -6,13 +6,15 @@
 }
 
 .your-game {
-  size: 20px;
-  margin: 0px 0px 3px 10px;
+  font-size: 16px;
+  margin: 3px 0px 3px 10px;
+  font-family: 'Lobster', cursive;
 }
 
 .game-status {
   margin: 0px 0px 3px 10px;
-  size: 20px;
+  font-size: 20px;
+  font-family: 'Lobster', cursive;
 }
 
 body {
@@ -21,7 +23,7 @@ body {
 
 .chat-container {
   opacity: 100;
-  float: right;
+  float: left;
   height: 570;
   width: 625px;
   padding-right: 10px;
@@ -48,7 +50,12 @@ body {
   color: white;
 }
 
-.messages { list-style-type: none; margin: 0; padding: 0; }
+.messages { 
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0; 
+}
+
 .messages li { padding: 5px 10px; }
 .messages li:nth-child(odd) { background: #eee; }
 .messages li:nth-child(even) { background: #fff; }
@@ -62,4 +69,14 @@ body {
 #container {
   height: 650px;
   width: 100%;
+}
+
+.white-1e1d7 {
+  background-color: rgba(214, 214, 214, 0.96);
+  color: #CFBB9C;
+}
+
+.black-3c85d {
+  background-color: #3a4f61;
+  color: #CFBB9C;
 }
