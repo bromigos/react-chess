@@ -83,7 +83,11 @@ export default class AppComponent extends React.Component{
     socket.on('game-status', error=> {
       alert(error);
     })
+    socket.on('leaving', function(){
+      alert("blahhhhh")
+    })
   }
+
   createGame(){
     var game_id = ("000000000" + Math.floor(Math.random()*1000000000)).slice(-9);
     var createObj = {
