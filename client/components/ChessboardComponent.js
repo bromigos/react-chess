@@ -39,8 +39,6 @@ export default class ChessBoardComponent extends React.Component{
       this.updateGameStatus();
       socket.emit('move', {uuid: this.state.uuid, moveObj: moveObj, pgnString: pgnString, fenString: this.state.chess.fen()});
       this.state.chessBoard.position(this.state.chess.fen(),false);
-      if(this.state.chess.game_over())
-        this.props.showResetGameBtn();
   }
 
   incomingMove(moveObj, fenString){
@@ -54,17 +52,6 @@ export default class ChessBoardComponent extends React.Component{
     else {
       console.log('err -- duplicate position received'); //defensive programming :)
     }
-<<<<<<< 02bcf99e551c67825140e43c4747c79ed352c2f4
-
-    // game over check
-    if (this.state.chess.game_over()) {
-      console.log('game is over: ', this.props.yourGame);
-      socket.emit('gameover', this.props.yourGame);
-      this.props.showResetGameBtn();
-    }
-    }
-=======
->>>>>>> Updated game over logic to include database update patch
   }
 
   updateGameStatus() {
@@ -78,6 +65,7 @@ export default class ChessBoardComponent extends React.Component{
       console.log('game is over: ', this.props.yourGame);
       this.setState({ status: 'Game over, ' + moveColor + ' is in checkmate.' });
       socket.emit('gameover', this.props.yourGame);
+      this.props.showResetGameBtn();
     }
 
     // draw?
