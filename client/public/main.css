@@ -14,13 +14,11 @@ body {
 }
 
 .chat-container {
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-  opacity: 0.9;
+  opacity: 100;
   float: right;
-  height:570px;
-  width:625px;
+  height: 570;
+  width: 625px;
+  padding-right: 10px;
 }
 
 .scrolly {
@@ -30,19 +28,36 @@ body {
   overflow-y: scroll;
 }
 
-.messages{
-  margin: 10px;
-  background:#fff;
-  border-radius: 10px;
-}
-
 #message {
   float:right;
   background:#eee;
-  width: 560px;
+  width: 545px;
+  margin: 6.5px 0px 5px 0px;
+}
+      
+.sendButton {
+  background-color: #080808;
+  margin: 5px;
+  float: right;
+  color: white;
 }
 
-.sendButton {
-  background-color: #fca;
-  float:right;
+.messages { list-style-type: none; margin: 0; padding: 0; }
+.messages li { padding: 5px 10px; }
+.messages li:nth-child(odd) { background: #eee; }
+.messages li:nth-child(even) { background: #fff; }
+
+.btn-default {
+  background-color: #2B2B2B;
+  color: white;
+  margin: 3px 0px 0px 10px;
+}
+
+.your-game {
+  margin: 0px 0px 3px 10px;
+}
+
+#container {
+  height: 650px;
+  width: 100%;
 }

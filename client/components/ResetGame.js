@@ -31,12 +31,6 @@ export default class ResetGame extends React.Component{
   }
 
   render() {
-  
-  var tooltip = (
-      <Tooltip id="modal-tooltip">
-        Set a time interval per move
-      </Tooltip>
-    );
 
     return (
       <div className='create-modal'>
@@ -45,23 +39,18 @@ export default class ResetGame extends React.Component{
           bsSize="small"
           onClick={this.open.bind(this)}
         >
-          Reset Game
+          End Game
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
           <Modal.Header closeButton>
-            <Modal.Title>Reset Game</Modal.Title>
+            <Modal.Title>Thanks for playing!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <h4>Select a time option</h4>
-            <Radio onClick={ this.props.fn.bind(this) }> Untimed </Radio>
-            <Radio onClick={ this.enter.bind(this, 15) }> 15 mins </Radio>
-            <Radio onClick={ this.enter.bind(this, 30) }> 30 mins </Radio>
-            <Radio onClick={ this.enter.bind(this, 60) }> 60 mins </Radio>
-            <p>Select a <OverlayTrigger overlay={tooltip}><a href="#">time</a></OverlayTrigger> setting</p>
-          </Modal.Body>
+
           <Modal.Footer>
-            <Button onClick={this.close.bind(this)}>Close</Button>
+            <Button onClick={this.close.bind(this)}>Exit</Button>
+            <Button onClick={this.close.bind(this)}>Cancel</Button>
+
           </Modal.Footer>
         </Modal>
       </div>
