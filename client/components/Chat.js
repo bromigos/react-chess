@@ -15,7 +15,7 @@ export default class Chat extends React.Component{
   componentDidMount(){
     this.state.socket.on('receive-message', (msg)=>{ // es6 style, implicitly binds parameter "this"
       var messages = this.state.messages;
-      messages.push(msg);
+      messages.unshift(msg);
       this.setState({messages: messages})
       console.log("messages: ", this.state.messages);
     })

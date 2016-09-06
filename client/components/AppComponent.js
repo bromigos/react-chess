@@ -147,7 +147,7 @@ export default class AppComponent extends React.Component{
         {this.waitUntilDoneLoading()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}
-        <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} />
+        <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} yourGame={this.state.yourGame} />
       </div>
     );
   }
