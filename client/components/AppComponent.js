@@ -109,7 +109,6 @@ export default class AppComponent extends React.Component{
             <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
            </ButtonToolbar>
            <br />
-          <p>Show setup</p>
           {/* <GameSetupComponent uuid={this.state.uuid} /> */}
         </div>
         );
