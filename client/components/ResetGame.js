@@ -40,7 +40,7 @@ export default class ResetGame extends React.Component{
           bsSize="small"
           onClick={this.open.bind(this)}
         >
-          End Game
+          Exit Game
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>

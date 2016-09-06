@@ -7,6 +7,12 @@
 
 .your-game {
   size: 20px;
+  margin: 0px 0px 3px 10px;
+}
+
+.game-status {
+  margin: 0px 0px 3px 10px;
+  size: 20px;
 }
 
 body {
@@ -51,10 +57,6 @@ body {
   background-color: #2B2B2B;
   color: white;
   margin: 3px 0px 0px 10px;
-}
-
-.your-game {
-  margin: 0px 0px 3px 10px;
 }
 
 #container {
