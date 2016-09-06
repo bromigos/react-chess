@@ -52,13 +52,6 @@ export default class ChessBoardComponent extends React.Component{
     else {
       console.log('err -- duplicate position received'); //defensive programming :)
     }
-
-    // game over check
-    if (this.state.chess.game_over()) {
-      console.log('game is over: ', this.props.yourGame);
-      socket.emit('gameover', this.props.yourGame);
-    }
-    }
   }
 
   updateGameStatus() {
@@ -69,7 +62,9 @@ export default class ChessBoardComponent extends React.Component{
 
     // checkmate?
     if (this.state.chess.in_checkmate() === true) {
+      console.log('game is over: ', this.props.yourGame);
       this.setState({ status: 'Game over, ' + moveColor + ' is in checkmate.' });
+      socket.emit('gameover', this.props.yourGame);
     }
 
     // draw?
