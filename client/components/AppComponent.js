@@ -68,8 +68,9 @@ export default class AppComponent extends React.Component{
 
   resetGame(gameId){
    // socket.emit('uuid',this.state.uuid);
+    socket.emit('exit-game');
     socket.emit('gameover', gameId);
-    this.setState({showResetGameBtn: false, showSetup:true});
+    this.setState({showResetGameBtn: false, showSetup:true, yourGame: undefined});
     console.log('resetGame');
     //socket.emit('uuid',this.state.uuid);
   }
@@ -111,13 +112,6 @@ export default class AppComponent extends React.Component{
     socket.emit('join-game', userObj);
     this.setState({yourGame: gameId, showModal: false});
   }
-
-  resetBtn(){
-    if(this.state.showResetGameBtn)
-      return ( <button onClick={this.resetGame.bind(this)}>New game</button> );
-
-  }
-
 
   waitUntilDoneLoading(){
       if(!this.state.loading && this.state.showSetup){
@@ -173,7 +167,6 @@ export default class AppComponent extends React.Component{
     return (
       <div id="container">
         {this.waitUntilDoneLoading()}
-        {this.resetBtn()}
         {this.renderLobbyChat()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}

@@ -43,6 +43,15 @@ io.on('connection', function(client){
     Chats.insert(message);
     io.emit('receive-message', msg);
   })
+
+  client.on('exit-game', function(){
+    Chats.fetchMessages()
+    .then(function(msg){
+      for(var i = msg.length -1; i >= 0; i--){
+        client.emit('receive-message', msg[i]);
+      }
+    })
+  })
   
   client.on('new-message', function(msg){
     console.log('msg to opponent:', msg);
