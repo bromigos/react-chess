@@ -36,6 +36,8 @@ export default class ChessBoardComponent extends React.Component{
   endMove(moveObj,pgnString){
       socket.emit('move', {uuid: this.state.uuid, moveObj: moveObj, pgnString: pgnString, fenString: this.state.chess.fen()});
       this.state.chessBoard.position(this.state.chess.fen(),false);
+      if(this.state.chess.game_over())
+        this.props.showResetGameBtn();
   }
 
   incomingMove(moveObj, fenString){
@@ -53,6 +55,7 @@ export default class ChessBoardComponent extends React.Component{
     if (this.state.chess.game_over()) {
       console.log('game is over: ', this.props.yourGame);
       socket.emit('gameover', this.props.yourGame);
+      this.props.showResetGameBtn();
     }
   }
 

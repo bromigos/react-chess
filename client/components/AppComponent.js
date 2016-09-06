@@ -10,6 +10,7 @@ import JoinGame from './JoinGame';
 var socket = require('socket.io-client')(document.location.href);
 var ButtonToolbar = require('react-bootstrap/lib/ButtonToolbar')
 
+
 export default class AppComponent extends React.Component{
 
   constructor(props){
@@ -61,7 +62,19 @@ export default class AppComponent extends React.Component{
       this.setState({uuid: myUUID});
       socket.emit('uuid',myUUID);
     });
-    
+  }
+
+  resetGame(){
+<<<<<<< HEAD
+   // socket.emit('uuid',this.state.uuid);
+    this.setState({showResetGameBtn: false, showSetup:true})
+=======
+    socket.emit('uuid',this.state.uuid);
+>>>>>>> 490bf01cff33fdd2a85f6462e86aedbd33005921
+  }
+
+  showResetGameBtn(){
+      this.setState({showResetGameBtn: true});
   }
 
   componentDidMount(){
@@ -98,6 +111,15 @@ export default class AppComponent extends React.Component{
     this.setState({yourGame: gameId, showModal: false});
   }
 
+  resetBtn(){
+    if(this.state.showResetGameBtn)
+<<<<<<< HEAD
+      return ( <button onClick={this.resetGame.bind(this)}>New game</button> );
+=======
+      return ( <button onClick={this.resetGame}>New game</button> );
+>>>>>>> 490bf01cff33fdd2a85f6462e86aedbd33005921
+  }
+
 
   waitUntilDoneLoading(){
       if(!this.state.loading && this.state.showSetup){
@@ -107,10 +129,9 @@ export default class AppComponent extends React.Component{
            <ButtonToolbar>
             <CreateGame showModal={false} fn={this.createGame} socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} position={this.state.position} yourGame={this.state.game_id} />
             <JoinGame showModal={false} fn={this.joinGame} uuid={this.state.uuid} />
+            
            </ButtonToolbar>
            <br />
-          <p>Show setup</p>
-          {/* <GameSetupComponent uuid={this.state.uuid} /> */}
         </div>
         );
       }
@@ -120,7 +141,7 @@ export default class AppComponent extends React.Component{
           <div>
          {/* <NavComponent /> */}
             <div className="your-game"> Your game code is: { this.getGameID() }</div>
-           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} yourGame={this.state.yourGame} />
+           <ChessboardComponent socket={socket} orientation={this.state.orientation} uuid={this.state.uuid} fen={this.state.position} showResetGameBtn={this.showResetGameBtn.bind(this)} yourGame={this.getGameID()} />
         </div>);
       }
       else {
@@ -145,6 +166,7 @@ export default class AppComponent extends React.Component{
     return (
       <div id="container">
         {this.waitUntilDoneLoading()}
+        {this.resetBtn()}
         {/* <NavComponent />
         // <ChessboardComponent socket={socket} pgn={this.state.pgn} />*/}
         <Chat username={this.state.username} socket={socket} uuid={this.state.uuid} yourGame={this.state.yourGame} />
