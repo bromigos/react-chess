@@ -37,10 +37,10 @@ Main.initialize = function(uuid,client){
 	// ok to delete / ignore this
 	Games.getGameByUUID(uuid).then(gameRow => {
 		console.log("gameRow",gameRow);
-		if(gameRow.length>0 && gameRow[0].inProgress != 0){ //check if they in-game
+		if(gameRow.length>0 && gameRow[gameRow.length-1].inProgress != 0){ //check if they in-game
 			// 1. emit init obj
 			//if(false){
-			var initObj = Object.assign(gameRow[0],{uuid: uuid});
+			var initObj = Object.assign(gameRow[gameRow.length-1],{uuid: uuid});
 			//TO DO:
 			// ==> {username}
 

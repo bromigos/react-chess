@@ -18,6 +18,7 @@ export default class ResetGame extends React.Component{
   }
 
   close() {
+    this.props.resetGame();
     this.setState({ showModal: false });
   }
 
@@ -49,7 +50,7 @@ export default class ResetGame extends React.Component{
 
           <Modal.Footer>
             <Button onClick={this.close.bind(this)}>Exit</Button>
-            <Button onClick={this.close.bind(this)}>Cancel</Button>
+            <Button onClick={this.setState.bind(this,{showModal: false})}>Cancel</Button>
 
           </Modal.Footer>
         </Modal>
