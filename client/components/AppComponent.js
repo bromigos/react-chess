@@ -128,6 +128,8 @@ export default class AppComponent extends React.Component{
             
            </ButtonToolbar>
            <br />     
+           <br />
+          {/* <GameSetupComponent uuid={this.state.uuid} /> */}
         </div>
         );
       }
