@@ -14,8 +14,16 @@ module.exports = {
     }
   },
   production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL,
+        client: 'pg',
+    connection: {
+      database: 'dahp9elepqegto',
+      user:     'luixlfsteuinfe',
+      password: 'heK8lqCHmbhh_ucHT9x8fcP51b'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
     migrations: {
       directory: __dirname + '/migrations'
     }
