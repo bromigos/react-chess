@@ -97,7 +97,7 @@ export default class AppComponent extends React.Component{
     socket.emit('new-game', createObj);
     this.state.yourGame = game_id;
     this.setState({gameCreated: false, showModal: false});
-    console.log(this.state.yourGame);
+    console.log("game created", this.state.yourGame);
   }
 
   getGameID(){
