@@ -1,9 +1,9 @@
 
 var uuid = require('uuid');
-var Chats = require('./chat');
-var Games = require('./games');
+var Chats = require('./Chats');
+var Games = require('./Games');
 
-var Main = require('./main');
+var Main = require('./Main');
 var io = Main.io;
 
 

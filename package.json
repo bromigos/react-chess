@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./server/main.js",
+    "start": "nodemon ./server/Main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Abel Costilla <aecostilla@gmail.com> Anjum Faraz <AnjumFaraz10@gmail.com> Jimmy Stevenson <jimmyaxstevenson@gmail.com>, Garrett Holmes <Garrett.Holmes@gmail.com>",
@@ -26,6 +26,7 @@
     "knex": "^0.11.10",
     "node-uuid": "^1.4.7",
     "nodemon": "^1.9.2",
+    "pg": "^6.1.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.1.0",
